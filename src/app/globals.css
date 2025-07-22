@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-primary: #2C3E50; /* Dark Blue/Gray for primary elements */
+    --color-secondary: #3498DB; /* Lighter Blue for accents */
+    --color-accent: #2ECC71; /* Green for positive actions/highlights */
+    --color-text-light: #ECF0F1; /* Light text on dark backgrounds */
+    --color-text-dark: #2C3E50; /* Dark text on light backgrounds */
+    --color-background-light: #F8F9FA; /* Light background */
+    --color-background-dark: #1A202C; /* Dark background */
   }
 }
 
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+  .animation-delay-800 {
+    animation-delay: 0.8s;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background-light);
+  color: var(--color-text-dark);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--color-background-dark);
+    color: var(--color-text-light);
+  }
 }
