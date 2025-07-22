@@ -148,40 +148,66 @@ export default function Header() {
         {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-20">
           <li ref={el => linkRefs.current['/'] = el} data-path="/">
-            <Link href="/" scroll={false} onClick={handleLogoClick} className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2">
+            <MotionLink
+              href="/"
+              scroll={false}
+              onClick={handleLogoClick}
+              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
               메인
-              
-            </Link>
+            </MotionLink>
           </li>
           <li ref={el => linkRefs.current['/sermons'] = el} data-path="/sermons">
-            <Link href="/sermons" className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2">
+            <MotionLink
+              href="/sermons"
+              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
               말씀
-              
-            </Link>
+            </MotionLink>
           </li>
           <li ref={el => linkRefs.current['/praise'] = el} data-path="/praise">
-            <Link href="/praise" className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2">
+            <MotionLink
+              href="/praise"
+              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
               찬양
-              
-            </Link>
+            </MotionLink>
           </li>
           <li ref={el => linkRefs.current['/school'] = el} data-path="/school">
-            <Link href="/school" className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2">
+            <MotionLink
+              href="/school"
+              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
               학교
-              
-            </Link>
+            </MotionLink>
           </li>
           <li ref={el => linkRefs.current['/department'] = el} data-path="/department">
-            <Link href="/department" className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2">
+            <MotionLink
+              href="/department"
+              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
               부서
-              
-            </Link>
+            </MotionLink>
           </li>
           <li ref={el => linkRefs.current['/koinonia'] = el} data-path="/koinonia">
-            <Link href="/koinonia" className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2">
+            <MotionLink
+              href="/koinonia"
+              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
               코이노니아
-              
-            </Link>
+            </MotionLink>
           </li>
         </ul>
 
@@ -200,14 +226,14 @@ export default function Header() {
         layoutId="underline"
         className="absolute bg-blue-600 h-0.5"
         style={{ left: activeLinkRect.x, width: activeLinkRect.width, top: activeLinkRect.y }}
-        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
       />
 
       <motion.div
         layoutId="underline"
         className="absolute bg-blue-600 h-0.5"
         style={{ left: activeLinkRect.x, width: activeLinkRect.width, top: activeLinkRect.y }}
-        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
       />
 
       {/* Mobile Menu */}
@@ -222,40 +248,71 @@ export default function Header() {
           >
             <ul className="flex flex-col items-center space-y-4">
               <li>
-                <Link href="/" scroll={false} onClick={handleLogoClick} className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2">
+                <MotionLink
+                  href="/"
+                  scroll={false}
+                  onClick={handleLogoClick}
+                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   메인
-                  
-                </Link>
+                </MotionLink>
               </li>
               <li>
-                <Link href="/sermons" className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2" onClick={toggleMobileMenu}>
+                <MotionLink
+                  href="/sermons"
+                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  onClick={toggleMobileMenu}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   말씀
-                  
-                </Link>
+                </MotionLink>
               </li>
               <li>
-                <Link href="/praise" className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2" onClick={toggleMobileMenu}>
+                <MotionLink
+                  href="/praise"
+                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  onClick={toggleMobileMenu}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   찬양
-                  
-                </Link>
+                </MotionLink>
               </li>
               <li>
-                <Link href="/school" className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2" onClick={toggleMobileMenu}>
+                <MotionLink
+                  href="/school"
+                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  onClick={toggleMobileMenu}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   학교
-                  
-                </Link>
+                </MotionLink>
               </li>
               <li>
-                <Link href="/department" className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2" onClick={toggleMobileMenu}>
+                <MotionLink
+                  href="/department"
+                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  onClick={toggleMobileMenu}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   부서
-                  
-                </Link>
+                </MotionLink>
               </li>
               <li>
-                <Link href="/koinonia" className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2" onClick={toggleMobileMenu}>
+                <MotionLink
+                  href="/koinonia"
+                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  onClick={toggleMobileMenu}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   코이노니아
-                  
-                </Link>
+                </MotionLink>
               </li>
             </ul>
           </motion.div>

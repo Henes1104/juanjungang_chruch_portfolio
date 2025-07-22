@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -18,10 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={inter.className}>
+      <body className={`${inter.className} flex flex-col min-h-screen`}>
         <Header />
-                {children}
-        
+        <main className="flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );

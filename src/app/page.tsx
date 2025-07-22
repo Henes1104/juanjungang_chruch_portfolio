@@ -313,7 +313,7 @@ export default function Home() {
               주안중앙교회는 성도님들을 언제나 환영합니다. 궁금한 점이 있으시면 언제든지 연락 주세요.
             </p>
             <p className="text-lg text-gray-700 mb-2"><span className="font-semibold">주소:</span> (우) 21449 인천광역시 부평구 가재울로 163</p>
-            <p className="text-lg text-gray-700 mb-2"><span className="font-semibold">전화:</span> 032-584-9145-9176</p>
+            <p className="text-lg text-gray-700 mb-2"><span className="font-semibold">전화:</span> 032-584-9145-76</p>
             
             <p className="text-lg text-gray-700 mb-4"><span className="font-semibold">이메일:</span> juanjch@naver.com</p>
             
@@ -340,16 +340,7 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* Footer */}
-      <footer className="w-full py-10 bg-gray-800 text-white text-center">
-        <div className="container mx-auto px-4">
-          <p className="mb-4">&copy; 2025 주안중앙교회. All rights reserved.</p>
-          <div className="flex justify-center space-x-4">
-            <Link href="/login" className="text-white hover:text-blue-400 transition duration-300">로그인</Link>
-            <Link href="/admin" className="text-white hover:text-blue-400 transition duration-300">관리자</Link>
-          </div>
-        </div>
-      </footer>
+      
 
       {isModalOpen && (
         <ImageModal

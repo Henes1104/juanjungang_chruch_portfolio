@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Header from "@/components/Header"; // Header 컴포넌트 재사용
-import YouTubePlayer from "@/components/YouTubePlayer"; // YouTubePlayer 컴포넌트 임포트
+import dynamic from "next/dynamic";
+
+const YouTubePlayer = dynamic(() => import("@/components/YouTubePlayer"), { ssr: false });
 
 export default function SermonsPage() {
   const [activeTab, setActiveTab] = useState<

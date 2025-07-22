@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,6 +7,9 @@ import Header from "@/components/Header";
 import Image from "next/image";
 import Link from "next/link";
 import { resourcesData } from "./data";
+import dynamic from "next/dynamic";
+
+const YouTubePlayer = dynamic(() => import("@/components/YouTubePlayer"), { ssr: false });
 
 // 모든 종류의 아이템을 다룰 수 있는 통합 인터페이스
 interface PraiseItem {
@@ -601,14 +604,10 @@ export default function PraisePage() {
               {currentItems.map((item) => (
                 <div key={item.id} className="bg-white rounded-xl shadow-xl overflow-hidden transform transition duration-300 hover:scale-102 hover:shadow-2xl">
                   <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
-                    <iframe
-                      className="absolute top-0 left-0 w-full h-full rounded-xl"
-                      src={`https://www.youtube.com/embed/${item.youtubeId}`}
-                      title="YouTube video player"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
+                    <YouTubePlayer
+                    videoId={item.youtubeId}
+                    title={item.title}
+                  />
                   </div>
                   <div className="p-4 text-left">
                     <h3 className="text-xl font-bold mb-2 text-gray-800 leading-tight">{item.title}</h3>
