@@ -773,13 +773,13 @@ export default function SermonsPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900 pt-20">
       <Header />
-      <main className="flex flex-1 container mx-auto px-8 py-12">
+      <main className="flex flex-col md:flex-row flex-1 container mx-auto px-4 py-8 md:px-8 md:py-12">
         {/* Sidebar Navigation */}
-        <aside className="w-1/5 pr-12 border-r border-gray-200 hidden md:block">
+        <aside className="w-full md:w-1/5 mb-8 md:mb-0 md:pr-12 md:border-r md:border-gray-200">
           <nav className="sticky top-24">
-            <h2 className="text-3xl font-extrabold mb-8 text-gray-800">예배 종류</h2>
-            <ul>
-              <li className="mb-4">
+            <h2 className="text-2xl md:text-3xl font-extrabold mb-8 text-gray-800">예배 종류</h2>
+            <ul className="flex md:flex-col overflow-x-auto whitespace-nowrap pb-4 md:pb-0">
+              <li className="mb-4 flex-shrink-0 mr-2 md:mr-0">
                 <button
                   onClick={() => {
                     setActiveTab("sunday");
@@ -794,7 +794,7 @@ export default function SermonsPage() {
                   주일예배
                 </button>
               </li>
-              <li className="mb-4">
+              <li className="mb-4 flex-shrink-0 mr-2 md:mr-0">
                 <button
                   onClick={() => {
                     setActiveTab("wednesday");
@@ -809,7 +809,7 @@ export default function SermonsPage() {
                   수요예배
                 </button>
               </li>
-              <li className="mb-4">
+              <li className="mb-4 flex-shrink-0 mr-2 md:mr-0">
                 <button
                   onClick={() => {
                     setActiveTab("allnight");
@@ -824,7 +824,7 @@ export default function SermonsPage() {
                   철야예배
                 </button>
               </li>
-              <li className="mb-4">
+              <li className="mb-4 flex-shrink-0 mr-2 md:mr-0">
                 <button
                   onClick={() => {
                     setActiveTab("guest");
@@ -844,8 +844,8 @@ export default function SermonsPage() {
         </aside>
 
         {/* Main Content - Sermon Cards */}
-        <section className="flex-1 pl-12">
-          <h1 className="text-5xl font-extrabold mb-10 text-gray-800 pb-4 inline-block">
+        <section className="flex-1 pl-0 md:pl-12">
+          <h1 className="text-3xl md:text-5xl font-extrabold mb-6 md:mb-10 text-gray-800 pb-4 inline-block">
             {activeTab === "sunday" && "주일예배"}
             {activeTab === "wednesday" && "수요예배"}
             {activeTab === "allnight" && "철야예배"}
@@ -864,16 +864,16 @@ export default function SermonsPage() {
                   />
                 </div>
                 <div className="p-4 text-left">
-                  <h3 className="text-xl font-bold mb-2 text-gray-800 leading-tight">
+                  <h3 className="text-lg md:text-xl font-bold mb-2 text-gray-800 leading-tight">
                     {sermon.title}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-1">
+                  <p className="text-gray-600 text-xs md:text-sm mb-1">
                     <span className="font-semibold">날짜:</span> {sermon.date}
                   </p>
-                  <p className="text-gray-600 text-sm mb-2">
+                  <p className="text-gray-600 text-xs md:text-sm mb-2">
                     <span className="font-semibold">설교:</span> {sermon.preacher}
                   </p>
-                  <p className="text-gray-700 text-base font-medium">{sermon.bible}</p>
+                  <p className="text-gray-700 text-sm md:text-base font-medium">{sermon.bible}</p>
                 </div>
               </div>
             ))}
@@ -882,15 +882,15 @@ export default function SermonsPage() {
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex justify-center items-center mt-12">
-              <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className="px-4 py-2 mx-1 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+              <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className="px-3 py-1 text-sm mx-0.5 md:px-4 md:py-2 md:text-base bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
                 이전
               </button>
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <button key={page} onClick={() => paginate(page)} className={`px-4 py-2 mx-1 border rounded-lg shadow-sm ${currentPage === page ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-300 hover:bg-gray-100'}`}>
+                <button key={page} onClick={() => paginate(page)} className={`px-3 py-1 text-sm mx-0.5 border rounded-lg shadow-sm ${currentPage === page ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-300 hover:bg-gray-100'}`}>
                   {page}
                 </button>
               ))}
-              <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages} className="px-4 py-2 mx-1 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+              <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages} className="px-3 py-1 text-sm mx-0.5 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
                 다음
               </button>
             </div>

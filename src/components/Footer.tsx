@@ -1,6 +1,11 @@
 
+'use client';
+
 import Link from 'next/link';
 import { FaYoutube, FaInstagram } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+
+const MotionLink = motion(Link);
 
 const Footer = () => {
   return (
@@ -16,8 +21,8 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-4">정책</h3>
             <ul className="space-y-2">
-              <li><Link href="/privacy" className="hover:text-gray-300">개인정보처리방침</Link></li>
-              <li><Link href="/terms" className="hover:text-gray-300">이용약관</Link></li>
+              <li><MotionLink href="/privacy" className="hover:text-gray-300" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>개인정보처리방침</MotionLink></li>
+              <li><MotionLink href="/terms" className="hover:text-gray-300" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>이용약관</MotionLink></li>
             </ul>
           </div>
         </div>

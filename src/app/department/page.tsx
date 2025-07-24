@@ -52,8 +52,47 @@ export default function DepartmentPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900 pt-20">
       <Header />
-      <main className="flex flex-1 container mx-auto px-8 py-12">
-        <aside className="w-1/5 pr-12 border-r border-gray-200 hidden md:block">
+      <main className="flex flex-col md:flex-row flex-1 container mx-auto px-4 sm:px-8 py-12">
+        <div className="md:hidden mb-8">
+          <div className="mb-6">
+            <label htmlFor="department-select" className="block text-sm font-medium text-gray-600 mb-2">부서 바로가기</label>
+            <select
+              id="department-select"
+              className="w-full p-3 border border-gray-200 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition-all duration-300 ease-in-out"
+              value={activeTab.split('-')[0]}
+              onChange={(e) => {
+                const tabId = e.target.value;
+                setActiveTab(`${tabId}-intro`);
+                // Resetting submenu states is good practice
+              }}
+            >
+              {tabs.map((tab) => (
+                <option key={tab.id} value={tab.id}>
+                  {tab.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex justify-center bg-gray-200 p-1 rounded-lg shadow-inner">
+            <button
+              onClick={() => setActiveTab(`${activeTab.split('-')[0]}-intro`)}
+              className={`w-1/2 py-2 text-base font-semibold rounded-md transition-all duration-300 ease-in-out ${
+                activeTab.endsWith('-intro') ? 'bg-white text-blue-600 shadow-md' : 'text-gray-600'
+              }`}>
+              소개
+            </button>
+            <button
+              onClick={() => setActiveTab(`${activeTab.split('-')[0]}-board`)}
+              className={`w-1/2 py-2 text-base font-semibold rounded-md transition-all duration-300 ease-in-out ${
+                activeTab.endsWith('-board') ? 'bg-white text-blue-600 shadow-md' : 'text-gray-600'
+              }`}>
+              게시판
+            </button>
+          </div>
+        </div>
+
+        <aside className="w-full md:w-1/5 md:pr-12 md:border-r md:border-gray-200 hidden md:block">
           <nav className="sticky top-24">
             <h2 className="text-3xl font-extrabold mb-8 text-gray-800">부서</h2>
             <ul>
@@ -137,7 +176,7 @@ export default function DepartmentPage() {
           </nav>
         </aside>
 
-        <section className="flex-1 pl-12">
+        <section className="flex-1 md:pl-12">
           <h1 className="text-5xl font-extrabold mb-10 text-gray-800 pb-4 inline-block">
             {departmentKr[activeTab.split('-')[0]]}
           </h1>

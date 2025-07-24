@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "framer-motion": "^12.23.5",
+    "framer-motion": "^11.0.0",
     "lite-youtube-embed": "^0.3.3",
     "next": "15.4.1",
     "react": "19.1.0",

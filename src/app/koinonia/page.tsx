@@ -55,9 +55,9 @@ const KoinoniaPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 pt-28">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 sm:px-6 md:px-8">
         <motion.h1
-          className="text-5xl font-extrabold mb-12 text-center text-gray-800 tracking-tight"
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-12 text-center text-gray-800 tracking-tight"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -65,7 +65,7 @@ const KoinoniaPage = () => {
           코이노니아
         </motion.h1>
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -78,8 +78,8 @@ const KoinoniaPage = () => {
               whileTap={{ scale: 0.95 }}
             >
               <Link href={item.link} className="block bg-white rounded-xl shadow-md p-8 h-full transition-all duration-300 border border-gray-200 group hover:border-blue-400 hover:shadow-lg">
-                  <h2 className="text-3xl font-bold mb-4 text-blue-700 group-hover:text-blue-800">{item.title}</h2>
-                  <p className="text-lg text-gray-600 group-hover:text-gray-700">{item.description}</p>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-blue-700 group-hover:text-blue-800">{item.title}</h2>
+                  <p className="text-base md:text-lg text-gray-600 group-hover:text-gray-700">{item.description}</p>
               </Link>
             </motion.div>
           ))}

@@ -32,19 +32,19 @@ const ResourcesPage = () => {
           {currentItems.map((item) => (
             <li key={item.id} className="py-4 flex justify-between items-center">
               <div>
-                <Link href={`/koinonia/resources/${item.id}`} legacyBehavior>
-                  <a className="text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300">
+                <Link href={`/koinonia/resources/${item.id}`}>
+                  <span className="text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300 cursor-pointer">
                     {item.title}
-                  </a>
+                  </span>
                 </Link>
                 <div className="text-sm text-gray-500 mt-1">
                   <span>{item.author}</span> | <span>{item.date}</span>
                 </div>
               </div>
-              <Link href={`/koinonia/resources/${item.id}`} legacyBehavior>
-                <a className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300">
+              <Link href={`/koinonia/resources/${item.id}`}>
+                <span className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300 cursor-pointer">
                   보기
-                </a>
+                </span>
               </Link>
             </li>
           ))}

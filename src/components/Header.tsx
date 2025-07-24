@@ -144,15 +144,15 @@ export default function Header() {
   return (
     <motion.header
       ref={headerRef}
-      className={`w-full fixed top-0 left-0 z-20 p-4 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white bg-opacity-80'}`}
+      className={`w-full fixed top-0 left-0 z-20 p-2 md:p-4 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white bg-opacity-80'}`}
     >
       <>
-      <nav className="container mx-auto flex justify-around items-center relative pr-10">
+      <nav className="container mx-auto flex justify-between items-center relative px-4 md:px-10">
         <motion.div
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         >
-          <Link href="/" onClick={handleLogoClick}>
+          <Link href="/" onClick={handleLogoClick} prefetch={true}>
             <Image
               src="/images/church_logo_garo.png"
               alt="주안중앙교회 로고"
@@ -163,12 +163,13 @@ export default function Header() {
           </Link>
         </motion.div>
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-20">
+        <ul className="hidden md:flex md:space-x-8 lg:space-x-20">
           <li ref={el => linkRefs.current['/'] = el} data-path="/">
             <MotionLink
                 href="/"
                 scroll={false}
                 onClick={handleLogoClick}
+                prefetch={true}
                 className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -179,6 +180,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/sermons'] = el} data-path="/sermons">
             <MotionLink
               href="/sermons"
+              prefetch={true}
               className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/sermons') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -189,6 +191,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/praise'] = el} data-path="/praise">
             <MotionLink
               href="/praise"
+              prefetch={true}
               className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/praise') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -199,6 +202,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/school'] = el} data-path="/school">
             <MotionLink
               href="/school"
+              prefetch={true}
               className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/school') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -209,6 +213,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/department'] = el} data-path="/department">
             <MotionLink
               href="/department"
+              prefetch={true}
               className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/department') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -219,6 +224,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/koinonia'] = el} data-path="/koinonia">
             <MotionLink
               href="/koinonia"
+              prefetch={true}
               className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/koinonia') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -262,6 +268,7 @@ export default function Header() {
                   href="/"
                   scroll={false}
                   onClick={handleLogoClick}
+                  prefetch={true}
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -272,6 +279,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/sermons"
+                  prefetch={true}
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/sermons') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
@@ -283,6 +291,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/praise"
+                  prefetch={true}
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/praise') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
@@ -294,6 +303,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/school"
+                  prefetch={true}
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/school') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
@@ -305,6 +315,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/department"
+                  prefetch={true}
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/department') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
@@ -316,6 +327,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/koinonia"
+                  prefetch={true}
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/koinonia') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}

@@ -499,11 +499,11 @@ export default function PraisePage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900 pt-20">
       <Header />
-      <main className="flex flex-1 container mx-auto px-8 py-12">
-        <aside className="w-1/5 pr-12 border-r border-gray-200 hidden md:block">
+      <main className="flex flex-col md:flex-row flex-1 container mx-auto px-4 py-8 md:px-8 md:py-12">
+        <aside className="w-full md:w-1/5 mb-8 md:mb-0 md:pr-12 md:border-r md:border-gray-200">
           <nav className="sticky top-24">
-            <h2 className="text-3xl font-extrabold mb-8 text-gray-800">찬양</h2>
-            <ul>
+            <h2 className="text-2xl md:text-3xl font-extrabold mb-8 text-gray-800">찬양</h2>
+            <ul className="flex md:flex-col overflow-x-auto whitespace-nowrap pb-4 md:pb-0">
               <li className="mb-4 relative">
                 <button
                   onClick={() => {
@@ -610,8 +610,8 @@ export default function PraisePage() {
                   />
                   </div>
                   <div className="p-4 text-left">
-                    <h3 className="text-xl font-bold mb-2 text-gray-800 leading-tight">{item.title}</h3>
-                    <p className="text-gray-600 text-sm mb-1"><span className="font-semibold">날짜:</span> {item.date}</p>
+                    <h3 className="text-lg md:text-xl font-bold mb-2 text-gray-800 leading-tight">{item.title}</h3>
+                    <p className="text-gray-600 text-xs md:text-sm mb-1"><span className="font-semibold">날짜:</span> {item.date}</p>
                   </div>
                 </div>
               ))}
@@ -620,12 +620,12 @@ export default function PraisePage() {
             <div>
               {currentItems.map((item) => (
                 <div key={item.id} className="bg-white rounded-lg shadow-md mb-4 p-6 hover:shadow-lg transition-shadow duration-300">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">{item.title}</h3>
-                  <div className="flex items-center text-sm text-gray-500 mb-4">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">{item.title}</h3>
+                  <div className="flex items-center text-xs md:text-sm text-gray-500 mb-4">
                     <span className="mr-4"><span className="font-semibold">작성자:</span> {item.author}</span>
                     <span><span className="font-semibold">작성일:</span> {item.date}</span>
                   </div>
-                  <Link href={`/praise/resources/${item.id}`} className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-300">
+                  <Link href={`/praise/resources/${item.id}`} className="inline-block bg-blue-600 text-white px-4 py-1.5 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-300 text-sm">
                     자료 보기
                   </Link>
                 </div>
@@ -636,15 +636,15 @@ export default function PraisePage() {
           {/* Pagination Controls */}
           {totalPages > 1 && (
             <div className="flex justify-center items-center mt-12">
-              <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className="px-4 py-2 mx-1 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+              <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className="px-3 py-1 text-sm mx-0.5 md:px-4 md:py-2 md:text-base bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
                 이전
               </button>
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <button key={page} onClick={() => paginate(page)} className={`px-4 py-2 mx-1 border rounded-lg shadow-sm ${currentPage === page ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-300 hover:bg-gray-100'}`}>
+                <button key={page} onClick={() => paginate(page)} className={`px-3 py-1 text-sm mx-0.5 border rounded-lg shadow-sm ${currentPage === page ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-300 hover:bg-gray-100'}`}>
                   {page}
                 </button>
               ))}
-              <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages} className="px-4 py-2 mx-1 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+              <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages} className="px-3 py-1 text-sm mx-0.5 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
                 다음
               </button>
             </div>
