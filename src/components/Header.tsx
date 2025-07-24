@@ -22,42 +22,63 @@ export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const linkRefs = useRef<Record<string, HTMLLIElement | null>>({});
 
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(path);
+  };
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const updateActiveLinkRect = () => {
     if (headerRef.current) {
-      const activeLinkElement = Object.values(linkRefs.current).find(ref => {
-        if (!ref) return false;
-        const linkPath = ref.getAttribute('data-path');
-        if (linkPath === '/') {
-          return pathname === '/';
-        } else if (linkPath) {
-          return pathname.startsWith(linkPath);
-        }
-        return false;
-      });
+      let foundActiveElement: HTMLLIElement | null = null;
 
-      if (activeLinkElement) {
+      // Prioritize exact match for '/'
+      if (pathname === '/') {
+        foundActiveElement = linkRefs.current['/'];
+      }
+
+      // If not '/', or if '/' is not found/active, then find the best startsWith match
+      if (!foundActiveElement) {
+        // Sort paths by length in descending order to find the most specific match first
+        const sortedLinkPaths = Object.keys(linkRefs.current).sort((a, b) => b.length - a.length);
+
+        for (const linkPath of sortedLinkPaths) {
+          const ref = linkRefs.current[linkPath];
+          if (ref && pathname.startsWith(linkPath)) {
+            foundActiveElement = ref;
+            break; // Found the most specific match
+          }
+        }
+      }
+
+      if (foundActiveElement) {
         const headerRect = headerRef.current.getBoundingClientRect();
-        const linkRect = activeLinkElement.getBoundingClientRect();
+        const linkRect = foundActiveElement.getBoundingClientRect();
         const underlineHeight = 0.5; // The height of the underline
         const underlineTop = headerRect.height - underlineHeight; // Position at the very bottom of the header
 
-        setActiveLinkRect({
+        const newRect = {
           x: linkRect.x - headerRect.x,
           y: underlineTop, // This will be used as 'top' in motion.div
           width: linkRect.width,
           height: underlineHeight,
-        });
+        };
+
+        setActiveLinkRect(newRect);
       } else {
-        setActiveLinkRect({
+        // If no active link is found, hide the underline
+        const newRect = {
           x: 0,
           y: 0,
           width: 0,
           height: 0.5,
-        });
+        };
+        setActiveLinkRect(newRect);
       }
     }
   };
@@ -122,12 +143,8 @@ export default function Header() {
 
   return (
     <motion.header
-      key={pathname}
       ref={headerRef}
       className={`w-full fixed top-0 left-0 z-20 p-4 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white bg-opacity-80'}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 100, damping: 20 }}
     >
       <>
       <nav className="container mx-auto flex justify-around items-center relative pr-10">
@@ -149,20 +166,20 @@ export default function Header() {
         <ul className="hidden md:flex space-x-20">
           <li ref={el => linkRefs.current['/'] = el} data-path="/">
             <MotionLink
-              href="/"
-              scroll={false}
-              onClick={handleLogoClick}
-              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              메인
-            </MotionLink>
+                href="/"
+                scroll={false}
+                onClick={handleLogoClick}
+                className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                메인
+              </MotionLink>
           </li>
           <li ref={el => linkRefs.current['/sermons'] = el} data-path="/sermons">
             <MotionLink
               href="/sermons"
-              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+              className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/sermons') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -172,7 +189,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/praise'] = el} data-path="/praise">
             <MotionLink
               href="/praise"
-              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+              className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/praise') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -182,7 +199,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/school'] = el} data-path="/school">
             <MotionLink
               href="/school"
-              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+              className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/school') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -192,7 +209,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/department'] = el} data-path="/department">
             <MotionLink
               href="/department"
-              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+              className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/department') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -202,7 +219,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/koinonia'] = el} data-path="/koinonia">
             <MotionLink
               href="/koinonia"
-              className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+              className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/koinonia') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -229,14 +246,7 @@ export default function Header() {
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
       />
 
-      <motion.div
-        layoutId="underline"
-        className="absolute bg-blue-600 h-0.5"
-        style={{ left: activeLinkRect.x, width: activeLinkRect.width, top: activeLinkRect.y }}
-        transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      />
-
-      {/* Mobile Menu */}
+      
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -252,7 +262,7 @@ export default function Header() {
                   href="/"
                   scroll={false}
                   onClick={handleLogoClick}
-                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -262,7 +272,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/sermons"
-                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/sermons') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -273,7 +283,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/praise"
-                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/praise') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -284,7 +294,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/school"
-                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/school') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -295,7 +305,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/department"
-                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/department') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -306,7 +316,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/koinonia"
-                  className="relative text-gray-800 hover:text-blue-600 transition duration-300 group inline-block px-8 py-2"
+                  className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/koinonia') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}

@@ -1,0 +1,453 @@
+// 모든 종류의 아이템을 다룰 수 있는 통합 인터페이스
+export interface PraiseItem {
+  id: string;
+  title: string;
+  date: string;
+  youtubeId?: string; // 찬양 영상용
+  author?: string; // 게시판용
+  link?: string; // 게시판용 (현재 사용 안함)
+}
+
+import { resourcesData } from "./data";
+
+export const praiseData: { [key: string]: PraiseItem[] } = {
+  sarang: [
+    {
+      id: "s5",
+      title: "심령이 가난한 자는",
+      date: "2025년 7월 13일",
+      youtubeId: "lcMJw7DyFu8",
+    },
+    {
+      id: "s6",
+      title: "감사의 찬송",
+      date: "2025년 7월 6일",
+      youtubeId: "4NoDzD0Z9Wc",
+    },
+    {
+      id: "s7",
+      title: "승천",
+      date: "2025년 6월 29일",
+      youtubeId: "l_1J-JNlEQc",
+    },
+    {
+      id: "s8",
+      title: "나의 죄를 씻기는",
+      date: "2025년 6월 22일",
+      youtubeId: "KUGVuCvag5M",
+    },
+    {
+      id: "s9",
+      title: "예수님이 말씀하시니",
+      date: "2025년 6월 15일",
+      youtubeId: "sw8BbQce2oc",
+    },
+    {
+      id: "s10",
+      title: "온 교회여 깨라",
+      date: "2025년 6월 8일",
+      youtubeId: "sm4NSMKr2ac",
+    },
+    {
+      id: "s11",
+      title: "갈보리산 십자가에",
+      date: "2025년 6월 1일",
+      youtubeId: "-ZNo20OW-Fs",
+    },
+    {
+      id: "s12",
+      title: "여호수아 성을 쳤네 여리고",
+      date: "2025년 5월 25일",
+      youtubeId: "er7lmr5P_68",
+    },
+    {
+      id: "s13",
+      title: "성도여 다 함께",
+      date: "2025년 5월 18일",
+      youtubeId: "IoFs5ictnrY",
+    },
+    {
+      id: "s14",
+      title: "주의나라 임하소서",
+      date: "2025년 5월 11일",
+      youtubeId: "12jpI7a8Vso",
+    },
+    {
+      id: "s15",
+      title: "어린 아이와 같이",
+      date: "2025년 5월 4일",
+      youtubeId: "0g2-JXFrU_A",
+    },
+    {
+      id: "s16",
+      title: "우리 때문에",
+      date: "2025년 4월 27일",
+      youtubeId: "hvC3ndKYISE",
+    },
+    {
+      id: "s17",
+      title: "거기 너 있었는가",
+      date: "2025년 4월 20일",
+      youtubeId: "3r8hvkGWBhs",
+    },
+    {
+      id: "s18",
+      title: "호산나 주의 이름으로 오시는 이여",
+      date: "2025년 4월 6일",
+      youtubeId: "nnBHBBeAxA4",
+    },
+    {
+      id: "s19",
+      title: "나를 따르려거든",
+      date: "2025년 3월 30일",
+      youtubeId: "LVNqtn3285Y",
+    },
+    {
+      id: "s20",
+      title: "참 좋으신 주님",
+      date: "2025년 3월 23일",
+      youtubeId: "hJM2H6bGVfA",
+    },
+    {
+      id: "s21",
+      title: "주께 가오니",
+      date: "2025년 3월 16일",
+      youtubeId: "4lRafkE-nuw",
+    },
+    {
+      id: "s22",
+      title: "주 의지하라",
+      date: "2025년 3월 9일",
+      youtubeId: "LxxJrLWSrEQ",
+    },
+    {
+      id: "s23",
+      title: "주의 도구로 사용하소서",
+      date: "2025년 3월 2일",
+      youtubeId: "hseROVz_v6k",
+    },
+    {
+      id: "s24",
+      title: "주 안에 있는 나에게",
+      date: "2025년 2월 23일",
+      youtubeId: "BA7_yTPP9X0",
+    },
+    {
+      id: "s25",
+      title: "계시는 주",
+      date: "2025년 2월 16일",
+      youtubeId: "UPS8LIzyyZQ",
+    },
+    {
+      id: "s26",
+      title: "너는 내 것이라",
+      date: "2025년 2월 9일",
+      youtubeId: "OumiqF3a8NI",
+    },
+    {
+      id: "s27",
+      title: "나의 눈을 들리라",
+      date: "2025년 2월 2일",
+      youtubeId: "wJQa39os20c",
+    },
+    {
+      id: "s28",
+      title: "저 높은 곳을 향하여",
+      date: "2025년 1월 26일",
+      youtubeId: "sU51DtSLaHY",
+    },
+    {
+      id: "s29",
+      title: "전능하신 주 하나님",
+      date: "2025년 1월 19일",
+      youtubeId: "zNsP8jjXaLs",
+    },
+    {
+      id: "s30",
+      title: "기뻐하며 경배하세",
+      date: "2025년 1월 12일",
+      youtubeId: "edpUrT5idLg",
+    },
+    {
+      id: "s31",
+      title: "저 천국 음악소리",
+      date: "2025년 1월 5일",
+      youtubeId: "eK1his_oIdE",
+    },
+  ],
+  gamsa: [
+    {
+      id: "g3",
+      title: "거룩하신 하나님",
+      date: "2025년 7월 13일",
+      youtubeId: "-QciJW0QkCo",
+    },
+    {
+      id: "g4",
+      title: "두려움과 고통의 숲 속에",
+      date: "2025년 6월 29일",
+      youtubeId: "WF7IOW5k-ig",
+    },
+    {
+      id: "g5",
+      title: "주의 나라 임하소서",
+      date: "2025년 6월 22일",
+      youtubeId: "cImc1lhYGP0",
+    },
+    {
+      id: "g6",
+      title: "주님과 같이",
+      date: "2025년 6월 15일",
+      youtubeId: "Mt_d0HQIdAc",
+    },
+    {
+      id: "g7",
+      title: "성령의 능력",
+      date: "2025년 6월 8일",
+      youtubeId: "T5oX9r9VeGM",
+    },
+    {
+      id: "g8",
+      title: "다 함께 찬양해",
+      date: "2025년 6월 1일",
+      youtubeId: "A_LUFsa2r4Y",
+    },
+    {
+      id: "g9",
+      title: "주의 친절한 팔에 안기세",
+      date: "2025년 5월 25일",
+      youtubeId: "iqQ8Q615RE8",
+    },
+    {
+      id: "g10",
+      title: "너희는 서로 사랑하라",
+      date: "2025년 5월 18일",
+      youtubeId: "kmz0_G6r5eU",
+    },
+    {
+      id: "g11",
+      title: "나를 길러주신 어버이",
+      date: "2025년 5월 11일",
+      youtubeId: "T9kNDwZ_C90",
+    },
+    {
+      id: "g12",
+      title: "어린이 나라",
+      date: "2025년 5월 4일",
+      youtubeId: "juLeoki5teA",
+    },
+    {
+      id: "g13",
+      title: "임하소서",
+      date: "2025년 4월 27일",
+      youtubeId: "PczjfLnEobk",
+    },
+    {
+      id: "g14",
+      title: "부활",
+      date: "2025년 4월 20일",
+      youtubeId: "rZvuiij-MEI",
+    },
+    {
+      id: "g15",
+      title: "십자가",
+      date: "2025년 4월 6일",
+      youtubeId: "qGpGNRlgcq0",
+    },
+    {
+      id: "g16",
+      title: "예수로 나의 구주 삼고",
+      date: "2025년 3월 30일",
+      youtubeId: "H1iKG-MQLpo",
+    },
+    {
+      id: "g17",
+      title: "내 맘의 주여 소망되소서",
+      date: "2025년 3월 23일",
+      youtubeId: "RjVsWnskmrA",
+    },
+    {
+      id: "g18",
+      title: "주 믿으라",
+      date: "2025년 3월 16일",
+      youtubeId: "X8-Vur8cg48",
+    },
+    {
+      id: "g19",
+      title: "주님의 축복",
+      date: "2025년 3월 9일",
+      youtubeId: "WVLzggUp408",
+    },
+    {
+      id: "g20",
+      title: "내 소망 되신 주님",
+      date: "2025년 3월 2일",
+      youtubeId: "P3qEIESs-MY",
+    },
+    {
+      id: "g21",
+      title: "홀로 영광 받으소서",
+      date: "2025년 2월 23일",
+      youtubeId: "_-uT7eiH6ck",
+    },
+    {
+      id: "g22",
+      title: "내 맘 속에 들리는 주 노래",
+      date: "2025년 2월 16일",
+      youtubeId: "H2jbRaxs71g",
+    },
+    {
+      id: "g23",
+      title: "음성",
+      date: "2025년 2월 9일",
+      youtubeId: "aImufQtHBfA",
+    },
+    {
+      id: "g24",
+      title: "빛 되신 주",
+      date: "2025년 2월 2일",
+      youtubeId: "Nd8mLeP5jYY",
+    },
+    {
+      id: "g25",
+      title: "믿음으로 가리라",
+      date: "2025년 1월 26일",
+      youtubeId: "ddruwbaUeHU",
+    },
+    {
+      id: "g26",
+      title: "주와 함께 가리라",
+      date: "2025년 1월 19일",
+      youtubeId: "VFaZUgF7Mmk",
+    },
+    {
+      id: "g27",
+      title: "우리는 주의 백성",
+      date: "2025년 1월 12일",
+      youtubeId: "bP14gJb8Z6Q",
+    },
+    {
+      id: "g28",
+      title: "거룩한 주",
+      date: "2025년 1월 5일",
+      youtubeId: "vqle_jlVF7g",
+    },
+  ],
+  events: [
+    {
+      id: "e3",
+      title: "2025 차세대교육국 헌신예배 초등,중등,고등,연수성전",
+      date: "2025년 7월 13일",
+      youtubeId: "mUqTXCQ0dHo",
+    },
+    {
+      id: "e4",
+      title: "2025 차세대교육국 주일학교헌신예배 영아,유치,유년,어린이영어예배",
+      date: "2025년 6월 29일",
+      youtubeId: "G9HnOiylCeU",
+    },
+    {
+      id: "e5",
+      title: "테힐라여성중창단",
+      date: "2025년 6월 22일",
+      youtubeId: "xZ4SkffKySg",
+    },
+    {
+      id: "e6",
+      title: "하늘찬양대(유년부찬양대)",
+      date: "2025년 5월 11일",
+      youtubeId: "MiMSrQp_y3E",
+    },
+    {
+      id: "e7",
+      title: "사랑찬양대",
+      date: "2025년 4월 22일",
+      youtubeId: "ZstpFOIKX30",
+    },
+    {
+      id: "e8",
+      title: "2025 교사헌신예배 교사특송 교사 및 교육위원회 일동",
+      date: "2025년 3월 16일",
+      youtubeId: "5j10KX3G_24",
+    },
+    {
+      id: "e9",
+      title: "2024 성탄감사예배 칸타타 사랑찬양대",
+      date: "2024년 12월 25일",
+      youtubeId: "ZnNiLAsIjeY",
+    },
+    {
+      id: "e10",
+      title: "2024 성탄축하발표회 차세대교육국일동",
+      date: "2024년 12월 22일",
+      youtubeId: "DLNK5_NiSGA",
+    },
+    {
+      id: "e11",
+      title: "은혜의 40년! 하나님께 영광! 창립40주년 기념음악회 주안중앙교회 찬양대",
+      date: "2024년 10월 27일",
+      youtubeId: "7FDusGYZzg4",
+    },
+    {
+      id: "e12",
+      title: "오직 주의 사랑에 매여 정용채 안수집사",
+      date: "2024년 10월 25일",
+      youtubeId: "45wcULIuJnU",
+    },
+    {
+      id: "e13",
+      title: "주와 같이 길 가는 것 테힐라여성중창단",
+      date: "2024년 9월 22일",
+      youtubeId: "xv22CsCmODs",
+    },
+    {
+      id: "e14",
+      title: "장학생 특송(2024년 장학위원회 헌신예배 및 장학증서 수여식) 장학생일동",
+      date: "2024년 8월 26일",
+      youtubeId: "ugdimpS8e0w",
+    },
+    {
+      id: "e15",
+      title: "백투스쿨 금요예배 특송 차세대교육국일동",
+      date: "2024년 8월 23일",
+      youtubeId: "N3ZzNQ6d650",
+    },
+    {
+      id: "e16",
+      title: "기드온 300용사 기도회 간증영상 기드온300용사",
+      date: "2024년 8월 18일",
+      youtubeId: "zRkBztgtJTQ",
+    },
+    {
+      id: "e17",
+      title: "청년부헌신예배 찬양,특송 청년부일동",
+      date: "2024년 8월 11일",
+      youtubeId: "UHGh5zjZJm4",
+    },
+    {
+      id: "e18",
+      title: "주의 보혈 김성수 안수집사",
+      date: "2024년 7월 26일",
+      youtubeId: "M6QZ43Evo9Y",
+    },
+    {
+      id: "e19",
+      title: "우릴 사용하소서 지역장일동",
+      date: "2024년 7월 19일",
+      youtubeId: "-O8OI2LtyaI",
+    },
+    {
+      id: "e20",
+      title: "2024 차세대교육국 헌신예배 (초,중,고 헌신예배)",
+      date: "2024년 7월 14일",
+      youtubeId: "kbdmegBQBFA",
+    },
+    {
+      id: "e21",
+      title: "2024 차세대교육국 주일학교헌신예배 (영아,유치,유년,영어예배부)",
+      date: "2024년 6월 30일",
+      youtubeId: "s9pt0K-Kp9c",
+    },
+  ],
+  resources: resourcesData.map((r) => ({ ...r, id: r.id.toString() })),
+};

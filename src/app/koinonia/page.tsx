@@ -77,9 +77,9 @@ const KoinoniaPage = () => {
               whileHover={{ y: -10, boxShadow: '0px 20px 30px rgba(0, 0, 0, 0.1)' }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href={item.link} className="block bg-white rounded-xl shadow-md p-8 h-full transition-shadow duration-300 border border-gray-200/50 overflow-hidden">
-                  <h2 className="text-3xl font-bold mb-4 text-gray-900">{item.title}</h2>
-                  <p className="text-lg text-gray-600">{item.description}</p>
+              <Link href={item.link} className="block bg-white rounded-xl shadow-md p-8 h-full transition-all duration-300 border border-gray-200 group hover:border-blue-400 hover:shadow-lg">
+                  <h2 className="text-3xl font-bold mb-4 text-blue-700 group-hover:text-blue-800">{item.title}</h2>
+                  <p className="text-lg text-gray-600 group-hover:text-gray-700">{item.description}</p>
               </Link>
             </motion.div>
           ))}

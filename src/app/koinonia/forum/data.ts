@@ -4,7 +4,6 @@ export interface BoardPost {
   author: string;
   date: string;
   content: string;
-  attachments?: string[];
 }
 
 export const forumPosts: BoardPost[] = [

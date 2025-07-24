@@ -5,10 +5,9 @@ import Header from "@/components/Header";
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-import YouTubePlayer from "@/components/YouTubePlayer";
 import dynamic from "next/dynamic";
 
-
+const YouTubePlayer = dynamic(() => import("@/components/YouTubePlayer"), { ssr: false });
 const ImageModal = dynamic(() => import("@/components/ImageModal"), { ssr: false });
 
 export default function Home() {
@@ -150,29 +149,7 @@ export default function Home() {
       >
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold mb-12 text-gray-800">최신 설교</h2>
-          <motion.div
-            className="relative w-full max-w-4xl mx-auto mb-6 aspect-video"
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-          >
-            <YouTubePlayer
-              videoId="VPoEmm6kJro"
-              title="우리 인생의 가장 절박한 문제를 통한 시험이 올 때"
-            />
-          </motion.div>
-          <motion.div
-            className="max-w-4xl mx-auto text-left mb-12"
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-          >
-            <h3 className="text-3xl font-bold mb-2 text-gray-800">우리 인생의 가장 절박한 문제를 통한 시험이 올 때</h3>
-            <p className="text-gray-600 text-lg mb-4">2025년 7월 13일 | 당회장 박응순 목사 | 주일예배</p>
-            <p className="text-gray-700 text-xl leading-relaxed">마태복음 4:1-4</p>
-          </motion.div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Sermon Card 1 */}
             <motion.div
@@ -184,15 +161,14 @@ export default function Home() {
             >
               <div className="relative w-full pt-[56.25%]"> {/* 16:9 Aspect Ratio */}
                 <YouTubePlayer
-                  videoId="A9czrkFybto"
-                  title="순교한 영혼이 있는 곳 (낙원)"
-                  start={3975}
+                  videoId="_bmWa7TLFdo"
+                  title="삼손 같은 교회와 성도가 되지 맙시다"
                 />
               </div>
               <div className="p-6 text-left">
-                <h3 className="text-xl font-semibold mb-2 text-gray-800">순교한 영혼이 있는 곳 (낙원)</h3>
-                <p className="text-gray-600 text-sm mb-4">2025년 7월 11일 | 당회장 박응순 목사 | 철야예배</p>
-                <p className="text-gray-700 text-base">요한계시록 6:9-11</p>
+                <h3 className="text-xl font-semibold mb-2 text-gray-800">삼손 같은 교회와 성도가 되지 맙시다</h3>
+                <p className="text-gray-600 text-sm mb-4">2025년 7월 20일 | 당회장 박응순 목사 | 주일예배</p>
+                <p className="text-gray-700 text-base">사사기 16:15-22</p>
               </div>
             </motion.div>
 
