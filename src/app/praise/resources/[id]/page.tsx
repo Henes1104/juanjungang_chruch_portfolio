@@ -105,7 +105,7 @@ export default function ResourceDetailPage() {
                 <p>{resource.content}</p>
               ) : resource.attachments && resource.attachments.length > 0 ? (
                 <div className="grid grid-cols-1 gap-8 mt-8">
-                  {resource.attachments.map((attachment, index) => (
+                  {resource.attachments.map((attachment: string, index: number) => (
                     <div key={index} className="border rounded-lg overflow-hidden">
                       <img
                 src={attachment}
