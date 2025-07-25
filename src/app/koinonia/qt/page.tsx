@@ -21,6 +21,7 @@ const QTPage = () => {
           width={800} // Adjust width as needed
           height={450} // Adjust height as needed
           className="rounded-lg shadow-lg"
+          unoptimized
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-white text-5xl font-extrabold drop-shadow-lg">주삶QT</span>
