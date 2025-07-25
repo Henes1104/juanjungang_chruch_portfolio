@@ -1,5 +1,5 @@
 export const runtime = 'edge';
-import { bulletinsData } from '../data.ts';
+import { bulletinsData } from '../data';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
