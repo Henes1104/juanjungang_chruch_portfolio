@@ -5,11 +5,14 @@ import { useParams } from "next/navigation";
 import { resourcesData } from "@/app/praise/data";
 import Link from "next/link";
 
+console.log('[ResourceDetailPage] Module loaded.');
+
 export default function ResourceDetailPage() {
   const params = useParams();
   const { id } = params;
   console.log(`[ResourceDetailPage] Received ID: ${id}`);
 
+  console.log('[ResourceDetailPage] Attempting to find resource...');
   const resource = resourcesData.find((r) => r.id === id);
   console.log(`[ResourceDetailPage] Found resource: ${resource ? resource.title : 'None'}`);
 
