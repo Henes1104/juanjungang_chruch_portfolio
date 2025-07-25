@@ -36,15 +36,14 @@ export default function BulletinDetailPage({ params }: PageProps) {
       <div className="grid grid-cols-1 gap-4">
         {bulletin.files.map((file, index) => (
           <div key={index} className="flex justify-center">
-            <div className="relative w-full" style={{ maxWidth: "800px", paddingTop: "150%" }}>
-              <Image
-                src={`/images/uploads/bulletins/${file}`}
-                alt={`${bulletin.title} - ${index + 1}`}
-                fill
-                className="rounded-lg shadow-md object-cover"
-                unoptimized
-              />
-            </div>
+            <Image
+              src={`/images/uploads/bulletins/${file}`}
+              alt={`${bulletin.title} - ${index + 1}`}
+              width={1200}
+              height={1800}
+              className="rounded-lg shadow-md object-contain mx-auto"
+              unoptimized
+            />
           </div>
         ))}
       </div>
