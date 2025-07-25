@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { galleryData, GalleryItem } from '../data';
 import { motion } from 'framer-motion';
 import ImageModal from '@/components/ImageModal';
+import Link from 'next/link';
 
 const GalleryDetailPage = () => {
   const params = useParams();
@@ -41,6 +42,11 @@ const GalleryDetailPage = () => {
       <div className="container mx-auto px-4 py-8 pt-28 text-center">
         <h1 className="text-4xl font-bold mb-4 text-gray-800">갤러리 항목을 찾을 수 없습니다.</h1>
         <p className="text-lg text-gray-700">존재하지 않는 갤러리 항목이거나 삭제되었습니다.</p>
+        <div className="mt-8 text-center">
+          <Link href="/koinonia/gallery" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-300">
+            목록으로
+          </Link>
+        </div>
       </div>
     );
   }
@@ -53,11 +59,13 @@ const GalleryDetailPage = () => {
   return (
     <div className="container mx-auto px-4 py-8 pt-28">
       <h1 className="text-4xl font-bold mb-4 text-gray-800 text-center">{galleryItem.title}</h1>
-      <div className="text-center text-gray-600 mb-8 flex justify-center items-center relative">
-        <span>작성자: {galleryItem.author}</span> | <span>등록일: {galleryItem.date}</span>
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center text-gray-600 mb-8">
+        <div>
+          <span>작성자: {galleryItem.author}</span> | <span>등록일: {galleryItem.date}</span>
+        </div>
         <button
           onClick={handleDownloadAll}
-          className="absolute right-0 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
+          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 md:ml-auto mt-4 md:mt-0"
         >
           모두 다운로드
         </button>
@@ -94,6 +102,12 @@ const GalleryDetailPage = () => {
       {isModalOpen && (
         <ImageModal src={selectedImage} alt={galleryItem.title} onClose={closeModal} />
       )}
+
+      <div className="mt-8 text-right">
+        <Link href="/koinonia/gallery" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-300">
+          목록으로
+        </Link>
+      </div>
     </div>
   );
 };

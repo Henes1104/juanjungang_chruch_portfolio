@@ -31,21 +31,17 @@ const ForumPage = () => {
         <ul className="divide-y divide-gray-200">
           {currentItems.map((item) => (
             <li key={item.id} className="py-4 flex justify-between items-center">
-              <div>
-                <Link href={`/koinonia/forum/${item.id}`} legacyBehavior>
-                  <a className="text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300">
+              <div className="flex-grow">
+                <Link href={`/koinonia/forum/${item.id}`} className="text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300">
                     {item.title}
-                  </a>
                 </Link>
                 <div className="text-sm text-gray-500 mt-1">
                   <span>{item.author}</span> | <span>{item.date}</span>
                 </div>
               </div>
-              <Link href={`/koinonia/forum/${item.id}`} legacyBehavior>
-                <a className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300">
+              <Link href={`/koinonia/forum/${item.id}`} className="inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300 flex-shrink-0 ml-4">
                   보기
-                </a>
-              </Link>
+                </Link>
             </li>
           ))}
         </ul>

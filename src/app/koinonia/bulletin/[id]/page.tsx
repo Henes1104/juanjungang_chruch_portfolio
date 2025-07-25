@@ -1,5 +1,6 @@
 import { bulletinsData } from '../data';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface BulletinDetailPageProps {
   params: { id: string };
@@ -13,7 +14,7 @@ export default function BulletinDetailPage({ params }: BulletinDetailPageProps) 
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 pt-28">
       <h1 className="text-3xl font-bold mb-4">{bulletin.title}</h1>
       <p className="text-gray-600 mb-2">등록자: {bulletin.author}</p>
       <p className="text-gray-600 mb-4">등록일: {bulletin.date}</p>
@@ -31,6 +32,11 @@ export default function BulletinDetailPage({ params }: BulletinDetailPageProps) 
             />
           </div>
         ))}
+      </div>
+      <div className="mt-8 text-right">
+        <Link href="/koinonia/bulletin" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-300">
+          목록으로
+        </Link>
       </div>
     </div>
   );
