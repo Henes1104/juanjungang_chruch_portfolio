@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import 'lite-youtube-embed'; // Import for side effects (registers custom element)
 
 interface LiteYouTubeComponentProps {
   videoId: string;
@@ -7,12 +8,6 @@ interface LiteYouTubeComponentProps {
 }
 
 const LiteYouTubeComponent: React.FC<LiteYouTubeComponentProps> = ({ videoId, title, start }) => {
-  useEffect(() => {
-    // Ensure the custom element is defined only once
-    if (typeof window !== 'undefined' && !customElements.get('lite-youtube')) {
-      require('lite-youtube-embed');
-    }
-  }, []);
 
   return React.createElement(
     'lite-youtube',
