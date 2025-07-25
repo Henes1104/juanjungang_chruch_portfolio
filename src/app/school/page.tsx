@@ -60,6 +60,16 @@ export default function SchoolPage() {
     "english": "영어예배부"
   }
 
+  const departmentImageMap: { [key: string]: string } = {
+    "infant": "infant.jpg",
+    "kindergarten": "kindergarten.jpg",
+    "yunyeon": "junior.jpg",
+    "elementary": "elementary.jpg",
+    "middle": "middle_school.jpg",
+    "high": "high_school.jpg",
+    "english": "english_worship.jpg",
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900 pt-20">
       <Header />
@@ -201,7 +211,7 @@ export default function SchoolPage() {
                       <h2 className="text-3xl font-bold mb-4">{tab.name} 소개</h2>
                       <div className="w-full">
                         <Image
-                          src={`/images/uploads/부서/${tab.id === 'yunyeon' ? 'junior' : tab.id}.jpg`}
+                          src={`/images/uploads/부서/${departmentImageMap[tab.id]}`}
                           alt={tab.name}
                           width={1000}
                           height={600}

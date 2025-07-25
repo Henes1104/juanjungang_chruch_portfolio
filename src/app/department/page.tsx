@@ -208,7 +208,7 @@ export default function DepartmentPage() {
                           src={
                             tab.id === 'youth' ? `/images/uploads/부서/youth.png` :
                             tab.id === 'education' ? `/images/uploads/부서/education_committee.jpg` :
-                            `/images/uploads/부서/parish_image.jpg`
+                            `/images/uploads/부서/${tab.id}.svg`
                           }
                           alt={tab.name}
                           width={1000}
