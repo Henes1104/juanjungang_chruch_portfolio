@@ -1,5 +1,6 @@
-export const runtime = 'nodejs';
 'use client';
+
+export const runtime = 'nodejs';
 
 import React, { useState } from 'react';
 import Link from 'next/link';

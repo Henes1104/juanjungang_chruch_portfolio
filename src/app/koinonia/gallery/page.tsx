@@ -1,5 +1,6 @@
-export const runtime = 'nodejs';
 'use client';
+
+export const runtime = 'nodejs';
 
 import React from 'react';
 import Image from 'next/image';
