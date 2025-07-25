@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { galleryData } from '../data';
 import GalleryDetailClient from '@/components/GalleryDetailClient';
 
