@@ -35,11 +35,12 @@ export default function BulletinDetailPage({ params }: PageProps) {
       <p className="text-gray-600 mb-4">등록일: {bulletin.date}</p>
       <div className="grid grid-cols-1 gap-4">
         {bulletin.files.map((file, index) => (
-          <div key={index} className="relative w-full" style={{ paddingTop: "150%" }}>
+          <div key={index} className="relative w-full h-auto">
             <Image
               src={`/images/uploads/bulletins/${file}`}
               alt={`${bulletin.title} - ${index + 1}`}
-              fill
+              width={800}
+              height={1200}
               className="rounded-lg shadow-md object-contain"
               unoptimized
             />
