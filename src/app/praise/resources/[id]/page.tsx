@@ -76,9 +76,7 @@ export default function ResourceDetailPage() {
                 alt={`${resource.title} - 첨부파일 ${index + 1}`}
                 width={800}
                 height={1200}
-                layout="responsive"
-                objectFit="contain"
-                className="w-full h-auto"
+                className="w-full h-auto rounded-lg shadow-md"
               />
                     </div>
                   ))}
