@@ -1,5 +1,5 @@
 export const runtime = 'edge';
-import { bulletinsData } from '../data';
+import { bulletinsData } from '../data.ts';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
@@ -34,11 +34,8 @@ export default function BulletinDetailPage({ params }: PageProps) {
             <Image
               src={`/images/uploads/bulletins/${file}`}
               alt={`${bulletin.title} - ${index + 1}`}
-              width={800}
-              height={1200}
-              layout="responsive"
-              objectFit="contain"
-              className="rounded-lg shadow-md"
+              fill
+              className="rounded-lg shadow-md object-contain"
             />
           </div>
         ))}
