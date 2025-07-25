@@ -3,9 +3,7 @@ export const runtime = 'edge';
 
 import { useParams } from "next/navigation";
 import { resourcesData } from "@/app/praise/data";
-import Header from "@/components/Header";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function ResourceDetailPage() {
   const params = useParams();
@@ -30,18 +28,16 @@ export default function ResourceDetailPage() {
 
   if (!resource) {
     return (
-      <>
-        <Header />
-        <main className="flex flex-1 justify-center items-center pt-20">
+      <div className="flex flex-col min-h-screen bg-gray-50 pt-20">
+        <main className="flex flex-1 justify-center items-center">
           <p className="text-xl">자료를 찾을 수 없습니다.</p>
         </main>
-      </>
+      </div>
     );
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pt-20">
-      <Header />
       <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white shadow-xl rounded-lg overflow-hidden">
           <div className="px-8 py-10">
