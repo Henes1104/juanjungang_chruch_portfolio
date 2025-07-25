@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 import { bulletinsData } from '../data';
 import Image from 'next/image';
 import Link from 'next/link';
