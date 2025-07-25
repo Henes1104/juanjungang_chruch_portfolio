@@ -18,15 +18,26 @@ export default function SchoolPage() {
   const [showHighSubMenu, setShowHighSubMenu] = useState(false);
   const [showEnglishSubMenu, setShowEnglishSubMenu] = useState(false);
 
+  const subMenuSetters: { [key: string]: React.Dispatch<React.SetStateAction<boolean>> } = {
+    setShowInfantSubMenu, setShowKindergartenSubMenu, setShowYunyeonSubMenu,
+    setShowElementarySubMenu, setShowMiddleSubMenu, setShowHighSubMenu,
+    setShowEnglishSubMenu
+  };
+
+  const subMenuStates: { [key: string]: boolean } = {
+    showInfantSubMenu, showKindergartenSubMenu, showYunyeonSubMenu,
+    showElementarySubMenu, showMiddleSubMenu, showHighSubMenu,
+    showEnglishSubMenu
+  };
+
   useEffect(() => {
     const currentMainTab = activeTab.split('-')[0];
-    if (currentMainTab !== 'infant') setShowInfantSubMenu(false);
-    if (currentMainTab !== 'kindergarten') setShowKindergartenSubMenu(false);
-    if (currentMainTab !== 'yunyeon') setShowYunyeonSubMenu(false);
-    if (currentMainTab !== 'elementary') setShowElementarySubMenu(false);
-    if (currentMainTab !== 'middle') setShowMiddleSubMenu(false);
-    if (currentMainTab !== 'high') setShowHighSubMenu(false);
-    if (currentMainTab !== 'english') setShowEnglishSubMenu(false);
+    Object.keys(subMenuSetters).forEach(key => {
+      const stateKey = `show${key.charAt(0).toUpperCase() + key.slice(1)}SubMenu`;
+      if (key !== currentMainTab) {
+        subMenuSetters[key](false); // 이 부분은 setter 함수를 직접 호출해야 함
+      }
+    });
   }, [activeTab]);
 
   const tabs = [
@@ -39,7 +50,7 @@ export default function SchoolPage() {
     { id: "english", name: "영어예배부" },
   ];
 
-  const departmentKr = {
+  const departmentKr: { [key: string]: string } = {
     "infant": "영아부",
     "kindergarten": "유치부",
     "yunyeon": "유년부",
@@ -96,86 +107,75 @@ export default function SchoolPage() {
           <nav className="sticky top-24">
             <h2 className="text-3xl font-extrabold mb-8 text-gray-800">학교</h2>
             <ul>
-              {tabs.map((tab) => (
-                <li key={tab.id} className="mb-4 relative">
-                  <button
-                    onClick={() => {
-                      const setterName = `setShow${tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}SubMenu`;
-                      const subMenuStateName = `show${tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}SubMenu`;
-                      
-                      const subMenuSetters = {
-                        setShowInfantSubMenu, setShowKindergartenSubMenu, setShowYunyeonSubMenu,
-                        setShowElementarySubMenu, setShowMiddleSubMenu, setShowHighSubMenu,
-                        setShowEnglishSubMenu
-                      };
-
-                      const subMenuStates = {
-                        showInfantSubMenu, showKindergartenSubMenu, showYunyeonSubMenu,
-                        showElementarySubMenu, showMiddleSubMenu, showHighSubMenu,
-                        showEnglishSubMenu
-                      }
-
-                      if (!subMenuStates[subMenuStateName]) {
-                        setActiveTab(`${tab.id}-intro`);
-                      }
-                      subMenuSetters[setterName](!subMenuStates[subMenuStateName]);
-                    }}
-                    className={`w-full text-left px-4 py-3 rounded-lg text-lg font-semibold ${
-                      (activeTab.startsWith(tab.id)) ? "bg-blue-600 text-white shadow-md" : "text-gray-700 hover:bg-blue-100 hover:text-blue-700"
-                    } transition duration-300 flex justify-between items-center`}
-                  >
-                    {tab.name}
-                    <svg
-                      className={`w-4 h-4 transform transition-transform duration-300 ${
-                        subMenuStates[subMenuStateName] ? "rotate-180" : "rotate-0"
-                      }`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
+              {tabs.map((tab) => {
+                const setterName = `setShow${tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}SubMenu`;
+                const subMenuStateName = `show${tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}SubMenu`;
+                return (
+                  <li key={tab.id} className="mb-4 relative">
+                    <button
+                      onClick={() => {
+                        if (!subMenuStates[subMenuStateName]) {
+                          setActiveTab(`${tab.id}-intro`);
+                        }
+                        subMenuSetters[setterName](!subMenuStates[subMenuStateName]);
+                      }}
+                      className={`w-full text-left px-4 py-3 rounded-lg text-lg font-semibold ${
+                        (activeTab.startsWith(tab.id)) ? "bg-blue-600 text-white shadow-md" : "text-gray-700 hover:bg-blue-100 hover:text-blue-700"
+                      } transition duration-300 flex justify-between items-center`}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      ></path>
-                    </svg>
-                  </button>
-                  <AnimatePresence>
-                    {subMenuStates[subMenuStateName] && (
-                      <motion.ul
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="pl-4 mt-2 space-y-2 overflow-hidden"
+                      {tab.name}
+                      <svg
+                        className={`w-4 h-4 transform transition-transform duration-300 ${
+                          subMenuStates[subMenuStateName] ? "rotate-180" : "rotate-0"
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        <li>
-                          <button
-                            onClick={() => setActiveTab(`${tab.id}-intro`)}
-                            className={`w-full text-left px-4 py-2 rounded-lg text-base font-medium ${
-                              activeTab === `${tab.id}-intro` ? "bg-blue-500 text-white" : "text-gray-600 hover:bg-blue-50"
-                            } transition duration-300`}
-                          >
-                            {tab.name} 소개
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            onClick={() => setActiveTab(`${tab.id}-board`)}
-                            className={`w-full text-left px-4 py-2 rounded-lg text-base font-medium ${
-                              activeTab === `${tab.id}-board` ? "bg-blue-500 text-white" : "text-gray-600 hover:bg-blue-50"
-                            } transition duration-300`}
-                          >
-                            {tab.name} 게시판
-                          </button>
-                        </li>
-                      </motion.ul>
-                    )}
-                  </AnimatePresence>
-                </li>
-              ))}
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
+                    </button>
+                    <AnimatePresence>
+                      {subMenuStates[subMenuStateName] && (
+                        <motion.ul
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="pl-4 mt-2 space-y-2 overflow-hidden"
+                        >
+                          <li>
+                            <button
+                              onClick={() => setActiveTab(`${tab.id}-intro`)}
+                              className={`w-full text-left px-4 py-2 rounded-lg text-base font-medium ${
+                                activeTab === `${tab.id}-intro` ? "bg-blue-500 text-white" : "text-gray-600 hover:bg-blue-50"
+                              } transition duration-300`}
+                            >
+                              {tab.name} 소개
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              onClick={() => setActiveTab(`${tab.id}-board`)}
+                              className={`w-full text-left px-4 py-2 rounded-lg text-base font-medium ${
+                                activeTab === `${tab.id}-board` ? "bg-blue-500 text-white" : "text-gray-600 hover:bg-blue-50"
+                              } transition duration-300`}
+                            >
+                              {tab.name} 게시판
+                            </button>
+                          </li>
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </aside>

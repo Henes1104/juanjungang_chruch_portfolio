@@ -608,12 +608,14 @@ export default function PraisePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {currentItems.map((item) => (
                 <div key={item.id} className="bg-white rounded-xl shadow-xl overflow-hidden transform transition duration-300 hover:scale-102 hover:shadow-2xl">
-                  <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
-                    <YouTubePlayer
-                    videoId={item.youtubeId}
-                    title={item.title}
-                  />
-                  </div>
+                  {item.youtubeId && (
+                    <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+                      <YouTubePlayer
+                        videoId={item.youtubeId}
+                        title={item.title}
+                      />
+                    </div>
+                  )}
                   <div className="p-4 text-left">
                     <h3 className="text-lg md:text-xl font-bold mb-2 text-gray-800 leading-tight">{item.title}</h3>
                     <p className="text-gray-600 text-xs md:text-sm mb-1"><span className="font-semibold">날짜:</span> {item.date}</p>

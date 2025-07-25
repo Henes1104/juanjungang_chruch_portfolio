@@ -160,7 +160,7 @@ export default function Header() {
         </motion.div>
         {/* Desktop Navigation */}
         <ul className="hidden md:flex md:space-x-8 lg:space-x-20">
-          <li ref={el => linkRefs.current['/'] = el} data-path="/">
+          <li ref={el => { linkRefs.current['/'] = el; }} data-path="/">
             <MotionLink
                 href="/"
                 onClick={handleLogoClick}
@@ -172,7 +172,7 @@ export default function Header() {
                 메인
               </MotionLink>
           </li>
-          <li ref={el => linkRefs.current['/sermons'] = el} data-path="/sermons">
+          <li ref={el => { linkRefs.current['/sermons'] = el; }} data-path="/sermons">
             <MotionLink
               href="/sermons"
               
@@ -183,7 +183,7 @@ export default function Header() {
               말씀
             </MotionLink>
           </li>
-          <li ref={el => linkRefs.current['/praise'] = el} data-path="/praise">
+          <li ref={el => { linkRefs.current['/praise'] = el; }} data-path="/praise">
             <MotionLink
               href="/praise"
               
@@ -194,7 +194,7 @@ export default function Header() {
               찬양
             </MotionLink>
           </li>
-          <li ref={el => linkRefs.current['/school'] = el} data-path="/school">
+          <li ref={el => { linkRefs.current['/school'] = el; }} data-path="/school">
             <MotionLink
               href="/school"
               
@@ -205,7 +205,7 @@ export default function Header() {
               학교
             </MotionLink>
           </li>
-          <li ref={el => linkRefs.current['/department'] = el} data-path="/department">
+          <li ref={el => { linkRefs.current['/department'] = el; }} data-path="/department">
             <MotionLink
               href="/department"
               
@@ -216,7 +216,7 @@ export default function Header() {
               부서
             </MotionLink>
           </li>
-          <li ref={el => linkRefs.current['/koinonia'] = el} data-path="/koinonia">
+          <li ref={el => { linkRefs.current['/koinonia'] = el; }} data-path="/koinonia">
             <MotionLink
               href="/koinonia"
               

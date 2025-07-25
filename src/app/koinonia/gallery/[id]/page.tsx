@@ -27,6 +27,11 @@ const GalleryDetailPage = () => {
   };
 
   const handleDownloadAll = () => {
+    if (!galleryItem) {
+      // galleryItem이 없으면 아무것도 하지 않음
+      console.warn("Gallery item not found, cannot download images.");
+      return;
+    }
     galleryItem.fullImagePaths.forEach((imagePath, index) => {
       const link = document.createElement('a');
       link.href = imagePath;

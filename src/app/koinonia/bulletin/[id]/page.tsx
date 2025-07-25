@@ -1,10 +1,13 @@
 import { bulletinsData } from '../data';
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { Metadata } from 'next';
 
-export async function generateMetadata(props: any): Promise<Metadata> {
+interface PageProps {
+  params: { id: string }
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const bulletin = bulletinsData.find((b) => b.id === params.id);
 
   return {
@@ -12,7 +15,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
   };
 }
 
-export default function BulletinDetailPage(props: any) {
+export default function BulletinDetailPage({ params }: PageProps) {
   const bulletin = bulletinsData.find((b) => b.id === params.id);
 
   if (!bulletin) {

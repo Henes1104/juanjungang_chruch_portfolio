@@ -1,4 +1,4 @@
-import { SermonItem } from "./page"; // Assuming SermonItem interface is defined in page.tsx or a shared type file
+
 
 export const sermonsData: { [key: string]: SermonItem[] } = {
   guest: [
