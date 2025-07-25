@@ -8,7 +8,7 @@ export interface PraiseItem {
   link?: string; // 게시판용 (현재 사용 안함)
 }
 
-import { resourcesData } from "./data";
+import { resourcesData } from "@/lib/data";
 
 export const praiseData: { [key: string]: PraiseItem[] } = {
   sarang: [
