@@ -63,7 +63,7 @@ export default function SchoolPage() {
   const departmentImageMap: { [key: string]: string } = {
     "infant": "infant.jpg",
     "kindergarten": "kindergarten.jpg",
-    "yunyeon": "junior.png",
+    "yunyeon": "junior.jpg",
     "elementary": "elementary.jpg",
     "middle": "middle_school.jpg",
     "high": "high_school.jpg",
