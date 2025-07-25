@@ -1,1 +1,0 @@
-fix: apply edge runtime to dynamic routes
