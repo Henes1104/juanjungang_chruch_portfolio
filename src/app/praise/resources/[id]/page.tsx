@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+
 
 import { resourcesData } from "@/app/praise/data";
 import Link from "next/link";
