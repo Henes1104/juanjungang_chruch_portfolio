@@ -41,6 +41,7 @@ export default function BulletinDetailPage({ params }: PageProps) {
               alt={`${bulletin.title} - ${index + 1}`}
               fill
               className="rounded-lg shadow-md object-contain"
+              unoptimized
             />
           </div>
         ))}

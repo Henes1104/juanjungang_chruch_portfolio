@@ -165,6 +165,7 @@ export default function Header() {
               width={180} // Adjust as needed for horizontal logo
               height={60} // Adjust as needed for horizontal logo
               priority
+              unoptimized
             />
           </Link>
         </motion.div>
