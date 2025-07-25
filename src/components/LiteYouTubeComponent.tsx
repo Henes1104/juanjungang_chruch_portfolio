@@ -14,20 +14,20 @@ const LiteYouTubeComponent: React.FC<LiteYouTubeComponentProps> = ({ videoId, ti
     }
   }, []);
 
-  return (
-    <lite-youtube
-      videoid={videoId}
-      playlabel={title}
-      params={start ? `start=${start}` : ''}
-      style={{
+  return React.createElement(
+    'lite-youtube',
+    {
+      videoid: videoId,
+      playlabel: title,
+      params: start ? `start=${start}` : '',
+      style: {
         position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
         height: '100%',
-      }}
-    ></lite-youtube>
+      },
+    }
   );
-};
 
 export default LiteYouTubeComponent;
