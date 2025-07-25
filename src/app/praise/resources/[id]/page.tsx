@@ -8,8 +8,10 @@ import Link from "next/link";
 export default function ResourceDetailPage() {
   const params = useParams();
   const { id } = params;
+  console.log(`[ResourceDetailPage] Received ID: ${id}`);
 
   const resource = resourcesData.find((r) => r.id === id);
+  console.log(`[ResourceDetailPage] Found resource: ${resource ? resource.title : 'None'}`);
 
   const handleDownloadAll = () => {
     if (resource && resource.attachments) {
@@ -69,13 +71,15 @@ export default function ResourceDetailPage() {
                 <div className="grid grid-cols-1 gap-8 mt-8">
                   {resource.attachments.map((attachment, index) => (
                     <div key={index} className="border rounded-lg overflow-hidden">
-                      <img
-                        src={attachment}
-                        alt={`${resource.title} - 첨부파일 ${index + 1}`}
-                        width={800}
-                        height={1200}
-                        className="w-full h-auto"
-                      />
+                      <Image
+                src={attachment}
+                alt={`${resource.title} - 첨부파일 ${index + 1}`}
+                width={800}
+                height={1200}
+                layout="responsive"
+                objectFit="contain"
+                className="w-full h-auto"
+              />
                     </div>
                   ))}
                 </div>
