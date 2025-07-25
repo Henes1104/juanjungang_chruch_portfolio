@@ -2,20 +2,52 @@
 export const runtime = 'edge';
 
 import { useParams } from "next/navigation";
-// import { resourcesData } from "@/app/praise/data"; // Temporarily commented out
 import Link from "next/link";
-
-console.log('[ResourceDetailPage] Module loaded.');
+import { useState, useEffect } from "react";
 
 export default function ResourceDetailPage() {
   const params = useParams();
   const { id } = params;
-  console.log(`[ResourceDetailPage] Received ID: ${id}`);
+  const [resource, setResource] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  console.log('[ResourceDetailPage] Attempting to find resource...');
-  // const resource = resourcesData.find((r) => r.id === id); // Temporarily commented out
-  const resource = null; // Simulate not finding resource for testing
-  console.log(`[ResourceDetailPage] Found resource: ${resource ? resource.title : 'None'}`);
+  useEffect(() => {
+    const fetchResource = async () => {
+      try {
+        // In a real application, you would fetch this from an API endpoint
+        // For now, we'll simulate fetching from the local data file
+        const { resourcesData } = await import("@/app/praise/data");
+        const foundResource = resourcesData.find((r) => r.id === id);
+        setResource(foundResource);
+      } catch (error) {
+        console.error("Failed to fetch resource:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchResource();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-50 pt-20">
+        <main className="flex flex-1 justify-center items-center">
+          <p className="text-xl">로딩 중...</p>
+        </main>
+      </div>
+    );
+  }
+
+  if (!resource) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-50 pt-20">
+        <main className="flex flex-1 justify-center items-center">
+          <p className="text-xl">자료를 찾을 수 없습니다.</p>
+        </main>
+      </div>
+    );
+  }
 
   const handleDownloadAll = () => {
     if (resource && resource.attachments) {
