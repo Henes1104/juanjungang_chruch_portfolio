@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams, useRouter } from "next/navigation";
 import Header from "@/components/Header";
@@ -22,6 +22,14 @@ interface PraiseItem {
 }
 
 export default function PraisePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PraisePageContent />
+    </Suspense>
+  );
+}
+
+function PraisePageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const activeTab = useMemo(() => {
