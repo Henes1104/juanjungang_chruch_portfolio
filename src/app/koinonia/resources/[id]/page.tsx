@@ -1,6 +1,6 @@
 export const runtime = 'edge';
 
-import { resourcesData } from '../data.ts';
+import { resourcesData } from '../data';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
