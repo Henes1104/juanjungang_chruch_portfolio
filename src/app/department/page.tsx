@@ -206,9 +206,9 @@ export default function DepartmentPage() {
                       <div className="w-full relative">
                         <Image
                           src={
-                            tab.id === 'youth' ? `/images/uploads/부서/청년부.png` :
-                            tab.id === 'education' ? `/images/uploads/부서/교육위원회.jpg` :
-                            `/images/uploads/부서/교구이미지.jpg`
+                            tab.id === 'youth' ? `/images/uploads/부서/youth.png` :
+                            tab.id === 'education' ? `/images/uploads/부서/education_committee.jpg` :
+                            `/images/uploads/부서/parish_image.jpg`
                           }
                           alt={tab.name}
                           width={1000}

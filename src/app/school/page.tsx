@@ -201,7 +201,7 @@ export default function SchoolPage() {
                       <h2 className="text-3xl font-bold mb-4">{tab.name} 소개</h2>
                       <div className="w-full">
                         <Image
-                          src={`/images/uploads/부서/${tab.name}.jpg`}
+                          src={`/images/uploads/부서/${tab.id === 'yunyeon' ? 'junior' : tab.id}.jpg`}
                           alt={tab.name}
                           width={1000}
                           height={600}

@@ -14,10 +14,10 @@ export const resourcesData: Resource[] = [
     author: "김윤희",
     date: "2024.10.26",
     attachments: [
-      "/images/uploads/caro_nome_lyrics/caro.1번.jpg",
-      "/images/uploads/caro_nome_lyrics/caro.2번.jpg",
-      "/images/uploads/caro_nome_lyrics/caro.3번.jpg",
-      "/images/uploads/caro_nome_lyrics/caro.4번.jpg",
+      "/images/uploads/caro_nome_lyrics/caro_1.jpg",
+      "/images/uploads/caro_nome_lyrics/caro_2.jpg",
+      "/images/uploads/caro_nome_lyrics/caro_3.jpg",
+      "/images/uploads/caro_nome_lyrics/caro_4.jpg",
     ],
   },
   {

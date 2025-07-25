@@ -3,7 +3,7 @@ const nextConfig = {
   
   swcMinify: false,
   images: {
-    domains: ['i.ytimg.com'],
+    // domains: ['i.ytimg.com'], // Removed as it's not needed for self-hosted images
   },
   transpilePackages: ['@vercel/turbopack-next'],
   async headers() {
