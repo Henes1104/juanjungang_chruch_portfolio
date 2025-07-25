@@ -1,14 +1,19 @@
-'use client';
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
-import React from 'react';
-import { useParams } from 'next/navigation';
 import { noticesData } from '../data';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 
-const NoticeDetailPage = () => {
-  const params = useParams();
+interface PageProps {
+  params: { id: string }
+}
+
+export async function generateStaticParams() {
+  return noticesData.map((notice) => ({
+    id: notice.id,
+  }));
+}
+
+const NoticeDetailPage = ({ params }: PageProps) => {
   const { id } = params;
 
   const notice = noticesData.find((n) => n.id === id);
@@ -28,10 +33,7 @@ const NoticeDetailPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 pt-28">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+      <div
         className="bg-white rounded-lg shadow-xl p-8"
       >
         <h1 className="text-4xl font-bold mb-2 text-gray-900">{notice.title}</h1>
@@ -48,7 +50,7 @@ const NoticeDetailPage = () => {
             </a>
           </Link>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
