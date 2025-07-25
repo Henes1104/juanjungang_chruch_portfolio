@@ -13,12 +13,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const [activeLinkRect, setActiveLinkRect] = useState<DOMRect | null>({
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0.5,
-  });
+  const [activeLinkRect, setActiveLinkRect] = useState<{ x: number; y: number; width: number; height: number; } | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const linkRefs = useRef<Record<string, HTMLLIElement | null>>({});
 
@@ -34,6 +29,9 @@ export default function Header() {
   };
 
   const updateActiveLinkRect = () => {
+    setActiveLinkRect(null); // Explicitly reset at the start
+    console.log('updateActiveLinkRect called. Current pathname:', pathname);
+
     if (headerRef.current) {
       let foundActiveElement: HTMLLIElement | null = null;
 
@@ -55,11 +53,12 @@ export default function Header() {
           }
         }
       }
+      console.log('Found active element:', foundActiveElement ? foundActiveElement.dataset.path : 'None');
 
       if (foundActiveElement) {
         const headerRect = headerRef.current.getBoundingClientRect();
         const linkRect = foundActiveElement.getBoundingClientRect();
-        const underlineHeight = 0.5; // The height of the underline
+        const underlineHeight = 2; // The height of the underline
         const underlineTop = headerRect.height - underlineHeight; // Position at the very bottom of the header
 
         const newRect = {
@@ -72,28 +71,24 @@ export default function Header() {
         setActiveLinkRect(newRect);
       } else {
         // If no active link is found, hide the underline
-        const newRect = {
-          x: 0,
-          y: 0,
-          width: 0,
-          height: 0.5,
-        };
-        setActiveLinkRect(newRect);
+        setActiveLinkRect(null);
       }
     }
   };
 
   useLayoutEffect(() => {
-    updateActiveLinkRect(); // pathname 변경 시마다 밑줄 위치 업데이트
-    const handleResize = () => {
+    const observer = new ResizeObserver(() => {
       updateActiveLinkRect();
-    };
+    });
 
-    window.addEventListener('resize', handleResize);
+    if (headerRef.current) {
+      observer.observe(headerRef.current);
+    }
+
     return () => {
-      window.removeEventListener('resize', handleResize);
+      observer.disconnect();
     };
-  }, [pathname]);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,6 +105,10 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useLayoutEffect(() => {
+    updateActiveLinkRect();
+  }, [pathname]);
 
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -144,7 +143,7 @@ export default function Header() {
   return (
     <motion.header
       ref={headerRef}
-      className={`w-full fixed top-0 left-0 z-20 p-2 md:p-4 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white bg-opacity-80'}`}
+      className={`w-full fixed top-0 left-0 z-20 p-2 md:p-4 transition-shadow duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white'}`}
     >
       <>
       <nav className="container mx-auto flex justify-between items-center relative px-4 md:px-10">
@@ -152,7 +151,7 @@ export default function Header() {
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         >
-          <Link href="/" onClick={handleLogoClick} prefetch={true}>
+          <Link href="/" onClick={handleLogoClick}>
             <Image
               src="/images/church_logo_garo.png"
               alt="주안중앙교회 로고"
@@ -167,9 +166,8 @@ export default function Header() {
           <li ref={el => linkRefs.current['/'] = el} data-path="/">
             <MotionLink
                 href="/"
-                scroll={false}
                 onClick={handleLogoClick}
-                prefetch={true}
+
                 className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -180,7 +178,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/sermons'] = el} data-path="/sermons">
             <MotionLink
               href="/sermons"
-              prefetch={true}
+              
               className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/sermons') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -191,7 +189,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/praise'] = el} data-path="/praise">
             <MotionLink
               href="/praise"
-              prefetch={true}
+              
               className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/praise') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -202,7 +200,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/school'] = el} data-path="/school">
             <MotionLink
               href="/school"
-              prefetch={true}
+              
               className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/school') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -213,7 +211,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/department'] = el} data-path="/department">
             <MotionLink
               href="/department"
-              prefetch={true}
+              
               className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/department') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -224,7 +222,7 @@ export default function Header() {
           <li ref={el => linkRefs.current['/koinonia'] = el} data-path="/koinonia">
             <MotionLink
               href="/koinonia"
-              prefetch={true}
+              
               className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/koinonia') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -245,12 +243,22 @@ export default function Header() {
         </div>
       </nav>
 
-      <motion.div
-        layoutId="underline"
-        className="absolute bg-blue-600 h-0.5"
-        style={{ left: activeLinkRect.x, width: activeLinkRect.width, top: activeLinkRect.y }}
-        transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      />
+      {activeLinkRect && (
+        <motion.div
+          key={pathname}
+          className="absolute bg-blue-600"
+          style={{ 
+            left: activeLinkRect.x, 
+            width: activeLinkRect.width, 
+            top: activeLinkRect.y, 
+            height: activeLinkRect.height,
+            transformOrigin: 'left' // Add this for the drawing effect
+          }}
+          initial={{ scaleX: 0 }} // Start with 0 width
+          animate={{ scaleX: 1 }} // Animate to full width
+          transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}
+        />
+      )}
 
       
       <AnimatePresence>
@@ -268,7 +276,7 @@ export default function Header() {
                   href="/"
                   scroll={false}
                   onClick={handleLogoClick}
-                  prefetch={true}
+  
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -279,7 +287,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/sermons"
-                  prefetch={true}
+  
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/sermons') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
@@ -291,7 +299,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/praise"
-                  prefetch={true}
+  
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/praise') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
@@ -303,7 +311,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/school"
-                  prefetch={true}
+  
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/school') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
@@ -315,7 +323,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/department"
-                  prefetch={true}
+  
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/department') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}
@@ -327,7 +335,7 @@ export default function Header() {
               <li>
                 <MotionLink
                   href="/koinonia"
-                  prefetch={true}
+  
                   className={`relative px-8 py-2 transition duration-300 group inline-block ${isActive('/koinonia') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'}`}
                   onClick={toggleMobileMenu}
                   whileHover={{ scale: 1.1 }}

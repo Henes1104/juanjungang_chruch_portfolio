@@ -16,10 +16,8 @@ const ResourceDetailPage = () => {
     return (
       <div className="container mx-auto px-4 py-8 pt-28 text-center">
         <h1 className="text-4xl font-bold">자료를 찾을 수 없습니다.</h1>
-        <Link href="/koinonia/resources" legacyBehavior>
-          <a className="mt-4 inline-block px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300">
-            목록으로 돌아가기
-          </a>
+        <Link href="/koinonia/resources" className="mt-4 inline-block px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300">
+          목록으로 돌아가기
         </Link>
       </div>
     );
@@ -57,11 +55,9 @@ const ResourceDetailPage = () => {
           </div>
         )}
         <div className="mt-8 text-right">
-          <Link href="/koinonia/resources" legacyBehavior>
-            <a className="px-6 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors duration-300">
-              목록으로
-            </a>
-          </Link>
+          <Link href="/koinonia/resources" className="px-6 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors duration-300">
+          목록으로
+        </Link>
         </div>
       </motion.div>
     </div>

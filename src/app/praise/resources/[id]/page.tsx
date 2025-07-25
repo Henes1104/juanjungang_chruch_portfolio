@@ -44,14 +44,14 @@ export default function ResourceDetailPage() {
       <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white shadow-xl rounded-lg overflow-hidden">
           <div className="px-8 py-10">
-            <div className="flex justify-between items-start mb-4">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
               <h1 className="text-4xl font-bold text-gray-900">
                 {resource.title}
               </h1>
               {resource.attachments && resource.attachments.length > 0 && (
                 <button
                   onClick={handleDownloadAll}
-                  className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 whitespace-nowrap"
+                  className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 w-full md:w-auto mt-4 md:mt-0"
                 >
                   전체 파일 다운로드
                 </button>

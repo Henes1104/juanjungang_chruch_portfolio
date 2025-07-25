@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,25 +23,29 @@ interface PraiseItem {
 
 export default function PraisePage() {
   const searchParams = useSearchParams();
-  const [activeTab, setActiveTab] = useState<
-    "sarang" | "gamsa" | "events" | "resources"
-  >("gamsa");
+  const router = useRouter();
+  const activeTab = useMemo(() => {
+    const tab = searchParams.get("tab");
+    return (tab === "resources" || tab === "sarang" || tab === "gamsa" || tab === "events") ? tab : "gamsa";
+  }, [searchParams]);
   const [showChoirSubMenu, setShowChoirSubMenu] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8; // 한 페이지에 표시될 항목 수
+  const itemsPerPage = 8; // 한 페이지에 표시될 항목 수 
 
   useEffect(() => {
-    const tab = searchParams.get("tab");
-    if (tab === "resources" || tab === "sarang" || tab === "gamsa" || tab === "events") {
-      setActiveTab(tab);
-    }
+    console.log('PraisePage useEffect triggered. Current searchParams:', searchParams.toString());
+    console.log('Derived activeTab:', activeTab);
 
     if (activeTab === "sarang" || activeTab === "gamsa") {
       setShowChoirSubMenu(true);
     } else {
       setShowChoirSubMenu(false);
     }
-  }, [searchParams, activeTab]);
+  }, [activeTab]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
 
   // 전체 찬양 데이터 (기존 데이터 복원 + 게시판 데이터 연동)
   const praiseData: { [key: string]: PraiseItem[] } = {
@@ -499,7 +503,7 @@ export default function PraisePage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900 pt-20">
       <Header />
-      <main className="flex flex-col md:flex-row flex-1 container mx-auto px-4 py-8 md:px-8 md:py-12">
+      <main key={searchParams.toString()} className="flex flex-col md:flex-row flex-1 container mx-auto px-4 py-8 md:px-8 md:py-12">
         <aside className="w-full md:w-1/5 mb-8 md:mb-0 md:pr-12 md:border-r md:border-gray-200">
           <nav className="sticky top-24">
             <h2 className="text-2xl md:text-3xl font-extrabold mb-8 text-gray-800">찬양</h2>
@@ -507,8 +511,9 @@ export default function PraisePage() {
               <li className="mb-4 relative">
                 <button
                   onClick={() => {
-                    if (!showChoirSubMenu && activeTab !== "sarang" && activeTab !== "gamsa") {
-                      setActiveTab("gamsa"); // Default to gamsa when opening choir menu
+                    const newTab = (activeTab === "sarang" || activeTab === "gamsa") ? activeTab : "gamsa";
+                    if (!showChoirSubMenu) {
+                      router.push(`/praise?tab=${newTab}`);
                     }
                     setShowChoirSubMenu(!showChoirSubMenu);
                   }}
@@ -545,7 +550,7 @@ export default function PraisePage() {
                     >
                       <li>
                         <button
-                          onClick={() => { setActiveTab("gamsa"); setCurrentPage(1); }}
+                          onClick={() => { router.push('/praise?tab=gamsa'); }}
                           className={`w-full text-left px-4 py-2 rounded-lg text-base font-medium ${
                             activeTab === "gamsa" ? "bg-blue-500 text-white" : "text-gray-600 hover:bg-blue-50"
                           } transition duration-300`}
@@ -555,7 +560,7 @@ export default function PraisePage() {
                       </li>
                       <li>
                         <button
-                          onClick={() => { setActiveTab("sarang"); setCurrentPage(1); }}
+                          onClick={() => { router.push('/praise?tab=sarang'); }}
                           className={`w-full text-left px-4 py-2 rounded-lg text-base font-medium ${
                             activeTab === "sarang" ? "bg-blue-500 text-white" : "text-gray-600 hover:bg-blue-50"
                           } transition duration-300`}
@@ -569,7 +574,7 @@ export default function PraisePage() {
               </li>
               <li className="mb-4">
                 <button
-                  onClick={() => { setActiveTab("events"); setCurrentPage(1); }}
+                  onClick={() => { router.push('/praise?tab=events'); }}
                   className={`w-full text-left px-4 py-3 rounded-lg text-lg font-semibold ${
                     activeTab === "events" ? "bg-blue-600 text-white shadow-md" : "text-gray-700 hover:bg-blue-100 hover:text-blue-700"
                   } transition duration-300`}
@@ -579,7 +584,7 @@ export default function PraisePage() {
               </li>
               <li className="mb-4">
                 <button
-                  onClick={() => { setActiveTab("resources"); setCurrentPage(1); }}
+                  onClick={() => { router.push('/praise?tab=resources'); }}
                   className={`w-full text-left px-4 py-3 rounded-lg text-lg font-semibold ${
                     activeTab === "resources" ? "bg-blue-600 text-white shadow-md" : "text-gray-700 hover:bg-blue-100 hover:text-blue-700"
                   } transition duration-300`}
