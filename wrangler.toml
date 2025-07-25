@@ -1,4 +1,4 @@
 name = "juanjungang-chruch-portfolio"
-pages_build_output_dir = ".vercel/output/static"
+pages_build_output_dir = "out"
 compatibility_date = "2025-07-25"
 compatibility_flags = ["nodejs_compat"]
