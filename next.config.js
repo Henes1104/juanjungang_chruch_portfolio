@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   swcMinify: false,
   images: {
     domains: ['i.ytimg.com'],
