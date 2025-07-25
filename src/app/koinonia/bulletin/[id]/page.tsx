@@ -39,8 +39,8 @@ export default function BulletinDetailPage({ params }: PageProps) {
             <Image
               src={`/images/uploads/bulletins/${file}`}
               alt={`${bulletin.title} - ${index + 1}`}
-              width={1280}
-              height={1920}
+              width={1200}
+              height={1800}
               className="rounded-lg shadow-md object-contain"
               unoptimized
             />
