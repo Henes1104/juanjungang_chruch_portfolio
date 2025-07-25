@@ -21,6 +21,3 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoId, title, start }) 
   );
 };
 
-export default YouTubePlayer;
-
-export default YouTubePlayer;
