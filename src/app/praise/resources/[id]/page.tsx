@@ -73,7 +73,7 @@ export default function ResourceDetailPage() {
                 <div className="grid grid-cols-1 gap-8 mt-8">
                   {resource.attachments.map((attachment, index) => (
                     <div key={index} className="border rounded-lg overflow-hidden">
-                      <Image
+                      <img
                         src={attachment}
                         alt={`${resource.title} - 첨부파일 ${index + 1}`}
                         width={800}
