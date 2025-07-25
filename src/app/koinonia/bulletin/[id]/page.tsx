@@ -7,6 +7,12 @@ interface PageProps {
   params: { id: string }
 }
 
+export async function generateStaticParams() {
+  return bulletinsData.map((bulletin) => ({
+    id: bulletin.id,
+  }));
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const bulletin = bulletinsData.find((b) => b.id === params.id);
 
