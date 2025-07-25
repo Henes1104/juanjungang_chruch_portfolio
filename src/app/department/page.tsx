@@ -3,7 +3,7 @@
 export const runtime = 'nodejs';
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import { departmentBoardData } from "./data";
 
@@ -148,38 +148,7 @@ export default function DepartmentPage() {
                       ></path>
                     </svg>
                   </button>
-                  <AnimatePresence>
-                    {subMenuStates[tab.id] && (
-                      <motion.ul
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="pl-4 mt-2 space-y-2 overflow-hidden"
-                      >
-                        <li>
-                          <button
-                            onClick={() => setActiveTab(`${tab.id}-intro`)}
-                            className={`w-full text-left px-4 py-2 rounded-lg text-base font-medium ${
-                              activeTab === `${tab.id}-intro` ? "bg-blue-500 text-white" : "text-gray-600 hover:bg-blue-50"
-                            } transition duration-300`}
-                          >
-                            {tab.name} 소개
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            onClick={() => setActiveTab(`${tab.id}-board`)}
-                            className={`w-full text-left px-4 py-2 rounded-lg text-base font-medium ${
-                              activeTab === `${tab.id}-board` ? "bg-blue-500 text-white" : "text-gray-600 hover:bg-blue-50"
-                            } transition duration-300`}
-                          >
-                            {tab.name} 게시판
-                          </button>
-                        </li>
-                      </motion.ul>
-                    )}
-                  </AnimatePresence>
+                  <div>
                 </li>
               ))}
             </ul>
@@ -191,11 +160,7 @@ export default function DepartmentPage() {
             {departmentKr[activeTab.split('-')[0]]}
           </h1>
 
-          <AnimatePresence mode="wait">
-            <div
-              key={activeTab}
-              className="bg-white p-8 rounded-lg shadow-xl"
-            >
+          <div>
               {tabs.map(tab => (
                 <div key={tab.id}>
                   {activeTab === `${tab.id}-intro` && (
@@ -256,8 +221,7 @@ export default function DepartmentPage() {
                   )}
                 </div>
               ))}
-            </AnimatePresence>
-          </section>
+            </div>
         </main>
       </div>
     </div>
