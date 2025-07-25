@@ -1,8 +1,7 @@
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 import { resourcesData } from '../data';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 
 interface PageProps {
   params: { id: string }
@@ -32,10 +31,7 @@ const ResourceDetailPage = ({ params }: PageProps) => {
 
   return (
     <div className="container mx-auto px-4 py-8 pt-28">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+      <div
         className="bg-white rounded-lg shadow-xl p-8"
       >
         <h1 className="text-4xl font-bold mb-2 text-gray-900">{resource.title}</h1>
@@ -66,7 +62,7 @@ const ResourceDetailPage = ({ params }: PageProps) => {
           목록으로
         </Link>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
