@@ -1,32 +1,17 @@
-"use client";
-
-export const runtime = 'edge';
-import { useParams } from "next/navigation";
+import { resourcesData } from "@/lib/data";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { getResourceById } from "@/lib/data";
 
-export default function ResourceDetailPage() {
-  const params = useParams();
+export async function generateStaticParams() {
+  return resourcesData.map((resource) => ({
+    id: resource.id,
+  }));
+}
+
+export default async function ResourceDetailPage({ params }: { params: { id: string } }) {
   const { id } = params;
-  const [resource, setResource] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchResource = async () => {
-      try {
-        const foundResource = getResourceById(id as string);
-        setResource(foundResource);
-      } catch (error) {
-        console.error("Failed to fetch resource:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchResource();
-  }, [id]);
+  const resource = resourcesData.find((r) => r.id === id);
 
   const handleDownloadAll = () => {
     if (resource && resource.attachments) {
@@ -41,16 +26,6 @@ export default function ResourceDetailPage() {
       });
     }
   };
-
-  if (loading) {
-    return (
-      <div className="flex flex-col min-h-screen bg-gray-50 pt-20">
-        <main className="flex flex-1 justify-center items-center">
-          <p className="text-xl">로딩 중...</p>
-        </main>
-      </div>
-    );
-  }
 
   if (!resource) {
     return (

@@ -8,8 +8,6 @@ export interface PraiseItem {
   link?: string; // 게시판용 (현재 사용 안함)
 }
 
-import { resourcesData } from "@/lib/data";
-
 export const praiseData: { [key: string]: PraiseItem[] } = {
   sarang: [
     {
@@ -449,5 +447,4 @@ export const praiseData: { [key: string]: PraiseItem[] } = {
       youtubeId: "s9pt0K-Kp9c",
     },
   ],
-  resources: resourcesData.map((r) => ({ ...r, id: r.id.toString() })),
-};
+  };

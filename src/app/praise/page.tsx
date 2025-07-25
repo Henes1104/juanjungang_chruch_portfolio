@@ -633,7 +633,7 @@ function PraisePageContent() {
             </div>
           ) : (
             <div>
-              {currentItems.map((item) => (
+              {resourcesData.map((item) => (
                 <div key={item.id} className="bg-white rounded-lg shadow-md mb-4 p-6 hover:shadow-lg transition-shadow duration-300">
                   <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">{item.title}</h3>
                   <div className="flex items-center text-xs md:text-sm text-gray-500 mb-4">
