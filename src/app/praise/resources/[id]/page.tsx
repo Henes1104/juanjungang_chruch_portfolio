@@ -14,10 +14,16 @@ export default function ResourceDetailPage() {
   useEffect(() => {
     const fetchResource = async () => {
       try {
-        // In a real application, you would fetch this from an API endpoint
-        // For now, we'll simulate fetching from the local data file
-        const { resourcesData } = await import("@/app/praise/data");
-        const foundResource = resourcesData.find((r) => r.id === id);
+        // const { resourcesData } = await import("@/app/praise/data"); // Temporarily commented out
+        // const foundResource = resourcesData.find((r) => r.id === id);
+        const foundResource = {
+          id: id,
+          title: `더미 제목 ${id}`,
+          author: "더미 작성자",
+          date: "2025.01.01",
+          content: "이것은 더미 내용입니다. 실제 데이터는 로드되지 않았습니다.",
+          attachments: [],
+        }; // Hardcoded dummy data
         setResource(foundResource);
       } catch (error) {
         console.error("Failed to fetch resource:", error);
