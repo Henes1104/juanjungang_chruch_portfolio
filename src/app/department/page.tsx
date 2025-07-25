@@ -192,12 +192,8 @@ export default function DepartmentPage() {
           </h1>
 
           <AnimatePresence mode="wait">
-            <motion.div
+            <div
               key={activeTab}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
               className="bg-white p-8 rounded-lg shadow-xl"
             >
               {tabs.map(tab => (
@@ -212,7 +208,7 @@ export default function DepartmentPage() {
                             alt={tab.name}
                             width={612}
                             height={408}
-                            className="rounded-lg shadow-md object-contain mx-auto"
+                            className="rounded-lg shadow-md object-cover mx-auto"
                             unoptimized
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
@@ -260,10 +256,10 @@ export default function DepartmentPage() {
                   )}
                 </div>
               ))}
-            </motion.div>
-          </AnimatePresence>
-        </section>
-      </main>
+            </AnimatePresence>
+          </section>
+        </main>
+      </div>
     </div>
   );
 }
