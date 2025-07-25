@@ -4,7 +4,6 @@ export const runtime = 'nodejs';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { noticesData } from './data';
 
 const NoticePage = () => {
@@ -21,14 +20,11 @@ const NoticePage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 pt-28">
-      <motion.h1
+      <h1
         className="text-4xl font-bold mb-8 text-center"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
       >
         공지사항
-      </motion.h1>
+      </h1>
       <div className="bg-white rounded-lg shadow-lg p-6">
         <ul className="divide-y divide-gray-200">
           {currentItems.map((item) => (
