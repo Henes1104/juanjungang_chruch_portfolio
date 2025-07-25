@@ -1,49 +1,19 @@
-"use client";
 export const runtime = 'edge';
 
-import { useParams } from "next/navigation";
+import { resourcesData } from "@/app/praise/data";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import Image from "next/image";
 
-export default function ResourceDetailPage() {
-  const params = useParams();
+export async function generateStaticParams() {
+  return resourcesData.map((resource) => ({
+    id: resource.id,
+  }));
+}
+
+export default async function ResourceDetailPage({ params }: { params: { id: string } }) {
   const { id } = params;
-  const [resource, setResource] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchResource = async () => {
-      try {
-        // const { resourcesData } = await import("@/app/praise/data"); // Temporarily commented out
-        // const foundResource = resourcesData.find((r) => r.id === id);
-        const foundResource = {
-          id: id,
-          title: `더미 제목 ${id}`,
-          author: "더미 작성자",
-          date: "2025.01.01",
-          content: "이것은 더미 내용입니다. 실제 데이터는 로드되지 않았습니다.",
-          attachments: [],
-        }; // Hardcoded dummy data
-        setResource(foundResource);
-      } catch (error) {
-        console.error("Failed to fetch resource:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchResource();
-  }, [id]);
-
-  if (loading) {
-    return (
-      <div className="flex flex-col min-h-screen bg-gray-50 pt-20">
-        <main className="flex flex-1 justify-center items-center">
-          <p className="text-xl">로딩 중...</p>
-        </main>
-      </div>
-    );
-  }
+  const resource = resourcesData.find((r) => r.id === id);
 
   if (!resource) {
     return (
@@ -60,7 +30,6 @@ export default function ResourceDetailPage() {
       resource.attachments.forEach((attachment: string, index: number) => {
         const link = document.createElement("a");
         link.href = attachment;
-        // 파일 이름에서 경로를 제거하고 순수 파일 이름만 사용
         const fileName = attachment.split("/").pop() || `attachment-${index + 1}`;
         link.download = fileName;
         document.body.appendChild(link);
@@ -69,16 +38,6 @@ export default function ResourceDetailPage() {
       });
     }
   };
-
-  if (!resource) {
-    return (
-      <div className="flex flex-col min-h-screen bg-gray-50 pt-20">
-        <main className="flex flex-1 justify-center items-center">
-          <p className="text-xl">자료를 찾을 수 없습니다.</p>
-        </main>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 pt-20">
@@ -114,12 +73,12 @@ export default function ResourceDetailPage() {
                   {resource.attachments.map((attachment: string, index: number) => (
                     <div key={index} className="border rounded-lg overflow-hidden">
                       <img
-                src={attachment}
-                alt={`${resource.title} - 첨부파일 ${index + 1}`}
-                width={800}
-                height={1200}
-                className="w-full h-auto rounded-lg shadow-md"
-              />
+                        src={attachment}
+                        alt={`${resource.title} - 첨부파일 ${index + 1}`}
+                        width={800}
+                        height={1200}
+                        className="w-full h-auto rounded-lg shadow-md"
+                      />
                     </div>
                   ))}
                 </div>
