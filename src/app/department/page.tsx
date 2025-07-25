@@ -205,24 +205,36 @@ export default function DepartmentPage() {
                   {activeTab === `${tab.id}-intro` && (
                     <div>
                       <h2 className="text-3xl font-bold mb-4">{tab.name} 소개</h2>
-                      <div className="w-full relative" style={{ paddingTop: "60%" }}>
-                        <Image
-                          src={
-                            tab.id === 'youth' ? `/images/uploads/부서/youth.png` :
-                            tab.id === 'education' ? `/images/uploads/부서/education_committee.jpg` :
-                            `/images/uploads/부서/parish${tab.id.replace('gyogu', '')}.svg`
-                          }
-                          alt={tab.name}
-                          fill
-                          className="rounded-lg object-cover"
-                          unoptimized
-                        />
-                        {(tab.id.startsWith('gyogu')) && (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="text-white text-5xl font-extrabold drop-shadow-lg">{tab.name}</span>
+                      {(tab.id.startsWith('gyogu')) ? (
+                        <div className="w-full flex justify-center">
+                          <div className="relative" style={{ maxWidth: "800px", width: "100%", paddingTop: "100%" }}>
+                            <Image
+                              src={`/images/uploads/부서/parish${tab.id.replace('gyogu', '')}.svg`}
+                              alt={tab.name}
+                              fill
+                              className="rounded-lg object-contain mx-auto"
+                              unoptimized
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <span className="text-white text-5xl font-extrabold drop-shadow-lg">{tab.name}</span>
+                            </div>
                           </div>
-                        )}
-                      </div>
+                        </div>
+                      ) : (
+                        <div className="w-full flex justify-center">
+                          <Image
+                            src={
+                              tab.id === 'youth' ? `/images/uploads/부서/youth.png` :
+                              `/images/uploads/부서/education_committee.jpg`
+                            }
+                            alt={tab.name}
+                            width={1200}
+                            height={720}
+                            className="rounded-lg shadow-md object-contain mx-auto"
+                            unoptimized
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                   {activeTab === `${tab.id}-board` && (

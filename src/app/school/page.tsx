@@ -211,12 +211,13 @@ export default function SchoolPage() {
                   {activeTab === `${tab.id}-intro` && (
                     <div>
                       <h2 className="text-3xl font-bold mb-4">{tab.name} 소개</h2>
-                      <div className="w-full relative" style={{ paddingTop: "60%" }}>
+                      <div className="w-full flex justify-center">
                         <Image
                           src={`/images/uploads/부서/${departmentImageMap[tab.id]}`}
                           alt={tab.name}
-                          fill
-                          className="rounded-lg object-cover"
+                          width={1200}
+                          height={720}
+                          className="rounded-lg shadow-md object-contain mx-auto"
                           unoptimized
                         />
                       </div>
