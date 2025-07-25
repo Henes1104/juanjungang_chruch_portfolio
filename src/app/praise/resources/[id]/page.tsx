@@ -51,7 +51,7 @@ export default function ResourceDetailPage() {
 
   const handleDownloadAll = () => {
     if (resource && resource.attachments) {
-      resource.attachments.forEach((attachment: string, index) => {
+      resource.attachments.forEach((attachment: string, index: number) => {
         const link = document.createElement("a");
         link.href = attachment;
         // 파일 이름에서 경로를 제거하고 순수 파일 이름만 사용
