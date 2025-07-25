@@ -83,4 +83,8 @@ export const resourcesData: Resource[] = [
     date: "2022.01.02",
     content: `주 하나님은 장미꽃 속에 계셔 \n솟아오르는 햇빛 속에 주영광 나타내시는도다\n​​​​​그 위엄을 산에나타내사 우리 기도들어주시네\n​​​​​만유의하나님 함께하시네\n​​새들의 노래속에 반짝이는 별빛에​​​​​​\n창조의 역사 빛나 우리의 희망과 \n영광 기쁨되시오니 주께 찬양드리자\n만유의 하나님 찬양 주님찬양\n아멘`,
   }
-]
+];
+
+export function getResourceById(id: string): Resource | undefined {
+  return resourcesData.find((resource) => resource.id === id);
+}

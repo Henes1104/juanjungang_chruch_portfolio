@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { resourcesData } from "@/app/praise/data";
+import { getResourceById } from "@/lib/data";
 
 export default function ResourceDetailPage() {
   const params = useParams();
@@ -16,7 +16,7 @@ export default function ResourceDetailPage() {
   useEffect(() => {
     const fetchResource = async () => {
       try {
-        const foundResource = resourcesData.find((r) => r.id === id);
+        const foundResource = getResourceById(id as string);
         setResource(foundResource);
       } catch (error) {
         console.error("Failed to fetch resource:", error);
