@@ -6,7 +6,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Header from "@/components/Header";
 
 import Link from "next/link";
-import { resourcesData } from "./data";
+import { resourcesData } from "@/lib/data";
 import dynamic from "next/dynamic";
 
 const YouTubePlayer = dynamic(() => import("@/components/YouTubePlayer"), { ssr: false });
