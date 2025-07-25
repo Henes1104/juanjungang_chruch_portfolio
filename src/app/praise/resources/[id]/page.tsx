@@ -2,7 +2,7 @@
 export const runtime = 'edge';
 
 import { useParams } from "next/navigation";
-import { resourcesData } from "@/app/praise/data";
+// import { resourcesData } from "@/app/praise/data"; // Temporarily commented out
 import Link from "next/link";
 
 console.log('[ResourceDetailPage] Module loaded.');
@@ -13,7 +13,8 @@ export default function ResourceDetailPage() {
   console.log(`[ResourceDetailPage] Received ID: ${id}`);
 
   console.log('[ResourceDetailPage] Attempting to find resource...');
-  const resource = resourcesData.find((r) => r.id === id);
+  // const resource = resourcesData.find((r) => r.id === id); // Temporarily commented out
+  const resource = null; // Simulate not finding resource for testing
   console.log(`[ResourceDetailPage] Found resource: ${resource ? resource.title : 'None'}`);
 
   const handleDownloadAll = () => {
