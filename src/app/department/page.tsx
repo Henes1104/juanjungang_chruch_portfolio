@@ -207,17 +207,16 @@ export default function DepartmentPage() {
                       <h2 className="text-3xl font-bold mb-4">{tab.name} 소개</h2>
                       {(tab.id.startsWith('gyogu')) ? (
                         <div className="w-full flex justify-center">
-                          <div className="relative" style={{ maxWidth: "800px", width: "100%", paddingTop: "100%" }}>
-                            <Image
-                              src={`/images/uploads/부서/parish${tab.id.replace('gyogu', '')}.svg`}
-                              alt={tab.name}
-                              fill
-                              className="rounded-lg object-contain mx-auto"
-                              unoptimized
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white text-5xl font-extrabold drop-shadow-lg">{tab.name}</span>
-                            </div>
+                          <Image
+                            src={`/images/uploads/부서/parish_image.jpg`}
+                            alt={tab.name}
+                            width={1200}
+                            height={720}
+                            className="rounded-lg shadow-md object-contain mx-auto"
+                            unoptimized
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-white text-5xl font-extrabold drop-shadow-lg">{tab.name}</span>
                           </div>
                         </div>
                       ) : (
