@@ -210,11 +210,10 @@ export default function SchoolPage() {
                     <div>
                       <h2 className="text-3xl font-bold mb-4">{tab.name} 소개</h2>
                       <div className="w-full relative" style={{ paddingTop: "60%" }}>
-                        <Image
+                        <img
                           src={`/images/uploads/부서/${departmentImageMap[tab.id]}`}
                           alt={tab.name}
-                          fill
-                          className="rounded-lg object-cover"
+                          className="rounded-lg w-full h-full object-cover"
                         />
                       </div>
                     </div>
