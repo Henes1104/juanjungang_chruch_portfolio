@@ -1,3 +1,4 @@
+export const runtime = 'nodejs';
 import { resourcesData } from './data';
 import KoinoniaResourceListClient from '@/components/KoinoniaResourceListClient';
 

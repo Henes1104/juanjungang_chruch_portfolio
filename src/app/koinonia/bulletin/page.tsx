@@ -1,3 +1,4 @@
+export const runtime = 'nodejs';
 import { bulletinsData } from './data';
 import BulletinListClient from '@/components/BulletinListClient';
 
