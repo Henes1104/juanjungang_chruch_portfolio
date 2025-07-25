@@ -2,11 +2,17 @@ import { bulletinsData } from '../data';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface BulletinDetailPageProps {
-  params: { id: string };
+import { Metadata } from 'next';
+
+export async function generateMetadata(props: any): Promise<Metadata> {
+  const bulletin = bulletinsData.find((b) => b.id === params.id);
+
+  return {
+    title: bulletin ? `주보: ${bulletin.title}` : '주보 상세',
+  };
 }
 
-export default function BulletinDetailPage({ params }: BulletinDetailPageProps) {
+export default function BulletinDetailPage(props: any) {
   const bulletin = bulletinsData.find((b) => b.id === params.id);
 
   if (!bulletin) {

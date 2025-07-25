@@ -127,7 +127,7 @@ export default function SchoolPage() {
                     {tab.name}
                     <svg
                       className={`w-4 h-4 transform transition-transform duration-300 ${
-                        eval(`show${tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}SubMenu`) ? "rotate-180" : "rotate-0"
+                        subMenuStates[subMenuStateName] ? "rotate-180" : "rotate-0"
                       }`}
                       fill="none"
                       stroke="currentColor"
@@ -143,7 +143,7 @@ export default function SchoolPage() {
                     </svg>
                   </button>
                   <AnimatePresence>
-                    {eval(`show${tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}SubMenu`) && (
+                    {subMenuStates[subMenuStateName] && (
                       <motion.ul
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}

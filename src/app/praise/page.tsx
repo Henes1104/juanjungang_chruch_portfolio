@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams, useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import Image from "next/image";
+
 import Link from "next/link";
 import { resourcesData } from "./data";
 import dynamic from "next/dynamic";
@@ -41,7 +41,7 @@ export default function PraisePage() {
     } else {
       setShowChoirSubMenu(false);
     }
-  }, [activeTab]);
+  }, [activeTab, searchParams]);
 
   useEffect(() => {
     setCurrentPage(1);

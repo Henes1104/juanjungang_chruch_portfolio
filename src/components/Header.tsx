@@ -88,7 +88,7 @@ export default function Header() {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [updateActiveLinkRect]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -129,10 +129,7 @@ export default function Header() {
     setIsMobileMenuOpen(false); // Close mobile menu after clicking
   };
 
-  const menuVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-  };
+  
 
   const mobileMenuVariants: Variants = {
     hidden: { x: "100%", opacity: 0 },

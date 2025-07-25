@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import { departmentBoardData } from "./data";
-import Link from "next/link";
+
 import Image from "next/image";
 
 export default function DepartmentPage() {
@@ -18,15 +18,33 @@ export default function DepartmentPage() {
   const [showYouthSubMenu, setShowYouthSubMenu] = useState(false);
   const [showEducationSubMenu, setShowEducationSubMenu] = useState(false);
 
+  const subMenuStates: { [key: string]: boolean } = {
+    gyogu1: showGyogu1SubMenu,
+    gyogu2: showGyogu2SubMenu,
+    gyogu3: showGyogu3SubMenu,
+    gyogu4: showGyogu4SubMenu,
+    gyogu5: showGyogu5SubMenu,
+    youth: showYouthSubMenu,
+    education: showEducationSubMenu,
+  };
+
+  const subMenuSetters: { [key: string]: React.Dispatch<React.SetStateAction<boolean>> } = {
+    gyogu1: setShowGyogu1SubMenu,
+    gyogu2: setShowGyogu2SubMenu,
+    gyogu3: setShowGyogu3SubMenu,
+    gyogu4: setShowGyogu4SubMenu,
+    gyogu5: setShowGyogu5SubMenu,
+    youth: setShowYouthSubMenu,
+    education: setShowEducationSubMenu,
+  };
+
   useEffect(() => {
     const currentMainTab = activeTab.split('-')[0];
-    if (currentMainTab !== 'gyogu1') setShowGyogu1SubMenu(false);
-    if (currentMainTab !== 'gyogu2') setShowGyogu2SubMenu(false);
-    if (currentMainTab !== 'gyogu3') setShowGyogu3SubMenu(false);
-    if (currentMainTab !== 'gyogu4') setShowGyogu4SubMenu(false);
-    if (currentMainTab !== 'gyogu5') setShowGyogu5SubMenu(false);
-    if (currentMainTab !== 'youth') setShowYouthSubMenu(false);
-    if (currentMainTab !== 'education') setShowEducationSubMenu(false);
+    Object.keys(subMenuSetters).forEach(key => {
+      if (key !== currentMainTab) {
+        subMenuSetters[key](false);
+      }
+    });
   }, [activeTab]);
 
   const tabs = [
@@ -39,7 +57,7 @@ export default function DepartmentPage() {
     { id: "education", name: "교육위원회" },
   ];
 
-  const departmentKr = {
+  const departmentKr: { [key: string]: string } = {
     "gyogu1": "1교구",
     "gyogu2": "2교구",
     "gyogu3": "3교구",
@@ -100,21 +118,11 @@ export default function DepartmentPage() {
                 <li key={tab.id} className="mb-4 relative">
                   <button
                     onClick={() => {
-                      const setterName = `setShow${tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}SubMenu`;
-                      const subMenuStateName = `show${tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}SubMenu`;
-                      
-                      const subMenuSetters = {
-                        setShowGyogu1SubMenu, setShowGyogu2SubMenu, setShowGyogu3SubMenu, setShowGyogu4SubMenu, setShowGyogu5SubMenu, setShowYouthSubMenu, setShowEducationSubMenu
-                      };
-
-                      const subMenuStates = {
-                        showGyogu1SubMenu, showGyogu2SubMenu, showGyogu3SubMenu, showGyogu4SubMenu, showGyogu5SubMenu, showYouthSubMenu, showEducationSubMenu
+                      const currentTabId = tab.id;
+                      if (!subMenuStates[currentTabId]) {
+                        setActiveTab(`${currentTabId}-intro`);
                       }
-
-                      if (!subMenuStates[subMenuStateName]) {
-                        setActiveTab(`${tab.id}-intro`);
-                      }
-                      subMenuSetters[setterName](!subMenuStates[subMenuStateName]);
+                      subMenuSetters[currentTabId](!subMenuStates[currentTabId]);
                     }}
                     className={`w-full text-left px-4 py-3 rounded-lg text-lg font-semibold ${
                       (activeTab.startsWith(tab.id)) ? "bg-blue-600 text-white shadow-md" : "text-gray-700 hover:bg-blue-100 hover:text-blue-700"
@@ -123,7 +131,7 @@ export default function DepartmentPage() {
                     {tab.name}
                     <svg
                       className={`w-4 h-4 transform transition-transform duration-300 ${
-                        eval(`show${tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}SubMenu`) ? "rotate-180" : "rotate-0"
+                        subMenuStates[tab.id] ? "rotate-180" : "rotate-0"
                       }`}
                       fill="none"
                       stroke="currentColor"
@@ -139,7 +147,7 @@ export default function DepartmentPage() {
                     </svg>
                   </button>
                   <AnimatePresence>
-                    {eval(`show${tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}SubMenu`) && (
+                    {subMenuStates[tab.id] && (
                       <motion.ul
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
@@ -195,12 +203,12 @@ export default function DepartmentPage() {
                   {activeTab === `${tab.id}-intro` && (
                     <div>
                       <h2 className="text-3xl font-bold mb-4">{tab.name} 소개</h2>
-                      <div className="w-full">
+                      <div className="w-full relative">
                         <Image
                           src={
                             tab.id === 'youth' ? `/images/uploads/부서/청년부.png` :
                             tab.id === 'education' ? `/images/uploads/부서/교육위원회.jpg` :
-                            `/images/uploads/부서/${tab.name}.svg`
+                            `/images/uploads/부서/교구이미지.jpg`
                           }
                           alt={tab.name}
                           width={1000}
@@ -208,6 +216,11 @@ export default function DepartmentPage() {
                           objectFit="cover"
                           className="rounded-lg w-full h-auto"
                         />
+                        {(tab.id.startsWith('gyogu')) && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-white text-5xl font-extrabold drop-shadow-lg">{tab.name}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}

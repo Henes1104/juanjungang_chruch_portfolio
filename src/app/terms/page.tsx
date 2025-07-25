@@ -34,7 +34,7 @@ export default function TermsOfServicePage() {
           <motion.h1 variants={itemVariants} className="text-4xl font-bold mb-8">이용약관</motion.h1>
           <motion.div variants={itemVariants} className="prose lg:prose-xl bg-white p-8 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mt-8 mb-4">제1조 (목적)</h2>
-            <p>이 약관은 주안중앙교회 웹사이트(이하 "사이트")에서 제공하는 모든 서비스(이하 "서비스")의 이용조건 및 절차에 관한 사항을 규정함을 목적으로 합니다.</p>
+            <p>1. 이 약관은 주안중앙교회 웹사이트(이하 &quot;사이트&quot;)에서 제공하는 모든 서비스(이하 &quot;서비스&quot;)의 이용조건 및 절차에 관한 사항을 규정함을 목적으로 합니다.</p>
 
             <h2 className="text-2xl font-bold mt-8 mb-4">제2조 (약관의 효력과 변경)</h2>
             <p>1. 이 약관은 사이트를 통해 게시하고 이용자가 이에 동의함으로써 효력을 발생합니다.</p>
