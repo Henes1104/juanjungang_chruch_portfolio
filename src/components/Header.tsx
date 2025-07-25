@@ -76,18 +76,18 @@ export default function Header() {
     }
   };
 
-  useLayoutEffect(() => {
-    const observer = new ResizeObserver(() => {
-      updateActiveLinkRect();
-    });
+  useEffect(() => {
+    if (typeof window !== 'undefined' && headerRef.current) {
+      const observer = new ResizeObserver(() => {
+        updateActiveLinkRect();
+      });
 
-    if (headerRef.current) {
       observer.observe(headerRef.current);
-    }
 
-    return () => {
-      observer.disconnect();
-    };
+      return () => {
+        observer.disconnect();
+      };
+    }
   }, [updateActiveLinkRect]);
 
   useEffect(() => {
@@ -106,9 +106,19 @@ export default function Header() {
     };
   }, []);
 
-  useLayoutEffect(() => {
-    updateActiveLinkRect();
-  }, [pathname]);
+  useEffect(() => {
+    if (typeof window !== 'undefined' && headerRef.current) {
+      const observer = new ResizeObserver(() => {
+        updateActiveLinkRect();
+      });
+
+      observer.observe(headerRef.current);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, [updateActiveLinkRect]);
 
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
