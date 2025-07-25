@@ -1,14 +1,20 @@
-'use client';
 export const runtime = 'edge';
 
-import React from 'react';
-import { useParams } from 'next/navigation';
-import { resourcesData } from '../data';
+import { resourcesData } from '../data.ts';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-const ResourceDetailPage = () => {
-  const params = useParams();
+interface PageProps {
+  params: { id: string }
+}
+
+export async function generateStaticParams() {
+  return resourcesData.map((resource) => ({
+    id: resource.id,
+  }));
+}
+
+const ResourceDetailPage = ({ params }: PageProps) => {
   const { id } = params;
 
   const resource = resourcesData.find((r) => r.id === id);
