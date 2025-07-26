@@ -118,6 +118,7 @@ export default function Home() {
               height={400}
               className="rounded-lg shadow-lg w-full h-auto object-contain cursor-pointer"
               onClick={() => setIsModalOpen(true)}
+              unoptimized
             />
           </motion.div>
           <motion.div
@@ -314,6 +315,7 @@ export default function Home() {
                   width={600}
                   height={256}
                   className="w-full h-auto"
+                  unoptimized
                 />
               </Link>
             </motion.div>
