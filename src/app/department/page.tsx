@@ -119,12 +119,11 @@ export default function DepartmentPage() {
                   <li key={tab.id} className="mb-4 relative">
                     <button
                       onClick={() => {
-                        const currentTabId = tab.id;
-                        if (!subMenuStates[currentTabId]) {
-                          setActiveTab(`${currentTabId}-intro`);
-                        }
-                        subMenuSetters[currentTabId](!subMenuStates[currentTabId]);
-                      }}
+                      setActiveTab(`${tab.id}-intro`);
+                      Object.keys(subMenuSetters).forEach(key => {
+                        subMenuSetters[key](false);
+                      });
+                    }}
                       className={`w-full text-left px-4 py-3 rounded-lg text-lg font-semibold ${
                         (activeTab.startsWith(tab.id)) ? "bg-blue-600 text-white shadow-md" : "text-gray-700 hover:bg-blue-100 hover:text-blue-700"
                       } transition duration-300 flex justify-between items-center`}
@@ -158,21 +157,26 @@ export default function DepartmentPage() {
               {departmentKr[activeTab.split('-')[0]]}
             </h1>
 
-            <div>
+            <motion.div
+              key={activeTab} // activeTab 변경 시 애니메이션 트리거
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
                 {tabs.map(tab => (
                   <div key={tab.id}>
                     {activeTab === `${tab.id}-intro` && (
                       <div>
                         <h2 className="text-3xl font-bold mb-4">{tab.name} 소개</h2>
                         {(tab.id.startsWith('gyogu')) ? (
-                          <div className="w-full flex justify-center">
+                          <div className="w-full flex justify-center relative">
                             <Image
                               src={`/images/uploads/부서/parish_image.jpg`}
                               alt={tab.name}
                               width={612}
                               height={408}
                               className="rounded-lg shadow-md object-cover mx-auto"
-                              unoptimized
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
                               <span className="text-white text-5xl font-extrabold drop-shadow-lg">{tab.name}</span>
@@ -189,7 +193,6 @@ export default function DepartmentPage() {
                               width={1200}
                               height={720}
                               className="rounded-lg shadow-md object-contain mx-auto"
-                              unoptimized
                             />
                           </div>
                         )}
@@ -219,7 +222,7 @@ export default function DepartmentPage() {
                     )}
                   </div>
                 ))}
-              </div>
+              </motion.div>
           </section>
         </main>
       </div>
