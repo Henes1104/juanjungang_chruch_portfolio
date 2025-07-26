@@ -16,7 +16,7 @@ const QTPage = () => {
 
       <div className="relative flex justify-center mb-8">
         <Image
-          src="/images/uploads/qt/qt.png" // Assuming qt.png is in public/images/uploads/qt/
+          src="/images/uploads/QT/QT.png" // Corrected path to match actual file system
           alt="QT 안내 이미지"
           width={800} // Adjust width as needed
           height={450} // Adjust height as needed
