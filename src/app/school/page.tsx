@@ -12,7 +12,7 @@ import Image from "next/image";
 export default function SchoolPage() {
   const [activeTab, setActiveTab] = useState<string>("infant-intro");
 
-  const [showInfantSubMenu, setShowInfantSubMenu] = useState(false);
+  const [showInfantSubMenu, setShowInfantSubMenu] = useState(true);
   const [showKindergartenSubMenu, setShowKindergartenSubMenu] = useState(false);
   const [showYunyeonSubMenu, setShowYunyeonSubMenu] = useState(false);
   const [showElementarySubMenu, setShowElementarySubMenu] = useState(false);
@@ -126,10 +126,16 @@ export default function SchoolPage() {
                   <li key={tab.id} className="mb-4 relative">
                     <button
                       onClick={() => {
-                        if (!subMenuStates[subMenuStateName]) {
-                          setActiveTab(`${tab.id}-intro`);
-                        }
-                        subMenuSetters[setterName](!subMenuStates[subMenuStateName]);
+                        setActiveTab(`${tab.id}-intro`); // Always set to intro
+                        subMenuSetters[setterName](true); // Always open the submenu
+
+                        // Close all other submenus
+                        Object.keys(subMenuSetters).forEach(key => {
+                          const otherSetterName = `setShow${key.charAt(0).toUpperCase() + key.slice(1)}SubMenu`;
+                          if (otherSetterName !== setterName) {
+                            subMenuSetters[otherSetterName](false);
+                          }
+                        });
                       }}
                       className={`w-full text-left px-4 py-3 rounded-lg text-lg font-semibold ${
                         (activeTab.startsWith(tab.id)) ? "bg-blue-600 text-white shadow-md" : "text-gray-700 hover:bg-blue-100 hover:text-blue-700"
