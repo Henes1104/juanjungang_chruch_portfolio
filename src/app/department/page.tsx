@@ -220,18 +220,18 @@ export default function DepartmentPage() {
                             </div>
                           </div>
                         ) : (
-                          <div className="w-full flex justify-center">
+                          <div className="w-full flex justify-center relative">
                             <Image
-                              src={
-                                tab.id === 'youth' ? `/images/uploads/부서/youth.png` :
-                                `/images/uploads/부서/education_committee.jpg`
-                              }
+                              src={`/images/uploads/부서/parish_image.jpg`}
                               alt={tab.name}
                               width={1200}
                               height={720}
-                              className="rounded-lg shadow-md object-contain mx-auto"
+                              className="rounded-lg shadow-md object-cover mx-auto"
                               unoptimized
                             />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <span className="text-white text-5xl font-extrabold drop-shadow-lg">{tab.name}</span>
+                            </div>
                           </div>
                         )}
                       </div>
