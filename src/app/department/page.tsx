@@ -10,7 +10,7 @@ import Image from "next/image";
 export default function DepartmentPage() {
   const [activeTab, setActiveTab] = useState<string>("gyogu1-intro");
 
-  const [showGyogu1SubMenu, setShowGyogu1SubMenu] = useState(false);
+  const [showGyogu1SubMenu, setShowGyogu1SubMenu] = useState(true);
   const [showGyogu2SubMenu, setShowGyogu2SubMenu] = useState(false);
   const [showGyogu3SubMenu, setShowGyogu3SubMenu] = useState(false);
   const [showGyogu4SubMenu, setShowGyogu4SubMenu] = useState(false);
