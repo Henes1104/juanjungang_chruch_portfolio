@@ -210,8 +210,8 @@ export default function DepartmentPage() {
                             <Image
                               src={`/images/uploads/부서/parish_image.jpg`}
                               alt={tab.name}
-                              width={612}
-                              height={408}
+                              width={1200}
+                              height={720}
                               className="rounded-lg shadow-md object-cover mx-auto"
                               unoptimized
                             />
