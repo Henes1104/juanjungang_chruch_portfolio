@@ -25,7 +25,7 @@ export default function TermsOfServicePage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900">
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-20 pt-32">
+      <main className="flex-grow container mx-auto px-4 py-20">
         <motion.div
           variants={containerVariants}
           initial="hidden"
