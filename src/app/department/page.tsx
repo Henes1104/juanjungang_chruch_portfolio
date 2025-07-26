@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import { departmentBoardData } from "./data";
-
 import Image from "next/image";
+
 
 export default function DepartmentPage() {
   const [activeTab, setActiveTab] = useState<string>("gyogu1-intro");
