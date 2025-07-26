@@ -177,6 +177,7 @@ export default function DepartmentPage() {
                               width={612}
                               height={408}
                               className="rounded-lg shadow-md object-cover mx-auto"
+                              unoptimized
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
                               <span className="text-white text-5xl font-extrabold drop-shadow-lg">{tab.name}</span>
@@ -193,6 +194,7 @@ export default function DepartmentPage() {
                               width={1200}
                               height={720}
                               className="rounded-lg shadow-md object-contain mx-auto"
+                              unoptimized
                             />
                           </div>
                         )}
