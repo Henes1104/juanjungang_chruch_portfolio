@@ -21,23 +21,30 @@ export default function SchoolPage() {
   const [showEnglishSubMenu, setShowEnglishSubMenu] = useState(false);
 
   const subMenuSetters: { [key: string]: React.Dispatch<React.SetStateAction<boolean>> } = {
-    setShowInfantSubMenu, setShowKindergartenSubMenu, setShowYunyeonSubMenu,
-    setShowElementarySubMenu, setShowMiddleSubMenu, setShowHighSubMenu,
-    setShowEnglishSubMenu
+    infant: setShowInfantSubMenu,
+    kindergarten: setShowKindergartenSubMenu,
+    yunyeon: setShowYunyeonSubMenu,
+    elementary: setShowElementarySubMenu,
+    middle: setShowMiddleSubMenu,
+    high: setShowHighSubMenu,
+    english: setShowEnglishSubMenu,
   };
 
   const subMenuStates: { [key: string]: boolean } = {
-    showInfantSubMenu, showKindergartenSubMenu, showYunyeonSubMenu,
-    showElementarySubMenu, showMiddleSubMenu, showHighSubMenu,
-    showEnglishSubMenu
+    infant: showInfantSubMenu,
+    kindergarten: showKindergartenSubMenu,
+    yunyeon: showYunyeonSubMenu,
+    elementary: showElementarySubMenu,
+    middle: showMiddleSubMenu,
+    high: showHighSubMenu,
+    english: showEnglishSubMenu,
   };
 
   useEffect(() => {
     const currentMainTab = activeTab.split('-')[0];
     Object.keys(subMenuSetters).forEach(key => {
-      const stateKey = `show${key.charAt(0).toUpperCase() + key.slice(1)}SubMenu`;
       if (key !== currentMainTab) {
-        subMenuSetters[key](false); // 이 부분은 setter 함수를 직접 호출해야 함
+        subMenuSetters[key](false);
       }
     });
   }, [activeTab]);
@@ -127,13 +134,12 @@ export default function SchoolPage() {
                     <button
                       onClick={() => {
                         setActiveTab(`${tab.id}-intro`); // Always set to intro
-                        subMenuSetters[setterName](true); // Always open the submenu
+                        subMenuSetters[tab.id](true); // Always open the submenu
 
                         // Close all other submenus
                         Object.keys(subMenuSetters).forEach(key => {
-                          const otherSetterName = `setShow${key.charAt(0).toUpperCase() + key.slice(1)}SubMenu`;
-                          if (otherSetterName !== setterName) {
-                            subMenuSetters[otherSetterName](false);
+                          if (key !== tab.id) {
+                            subMenuSetters[key](false);
                           }
                         });
                       }}
@@ -144,7 +150,7 @@ export default function SchoolPage() {
                       {tab.name}
                       <svg
                         className={`w-4 h-4 transform transition-transform duration-300 ${
-                          subMenuStates[subMenuStateName] ? "rotate-180" : "rotate-0"
+                          subMenuStates[tab.id] ? "rotate-180" : "rotate-0"
                         }`}
                         fill="none"
                         stroke="currentColor"
@@ -160,7 +166,7 @@ export default function SchoolPage() {
                       </svg>
                     </button>
                     <AnimatePresence>
-                      {subMenuStates[subMenuStateName] && (
+                      {subMenuStates[tab.id] && (
                         <motion.ul
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
