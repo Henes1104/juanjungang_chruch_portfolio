@@ -119,18 +119,14 @@ export default function DepartmentPage() {
                   <li key={tab.id} className="mb-4 relative">
                     <button
                       onClick={() => {
-                        const currentSubMenuState = subMenuStates[tab.id];
-                        subMenuSetters[tab.id](!currentSubMenuState);
+                        setActiveTab(`${tab.id}-intro`);
+                        subMenuSetters[tab.id](true);
 
                         Object.keys(subMenuSetters).forEach(key => {
                           if (key !== tab.id) {
                             subMenuSetters[key](false);
                           }
                         });
-
-                        if (currentSubMenuState) {
-                          setActiveTab(`${tab.id}-intro`);
-                        }
                       }}
                       className={`w-full text-left px-4 py-3 rounded-lg text-lg font-semibold ${
                         (activeTab.startsWith(tab.id)) ? "bg-blue-600 text-white shadow-md" : "text-gray-700 hover:bg-blue-100 hover:text-blue-700"
