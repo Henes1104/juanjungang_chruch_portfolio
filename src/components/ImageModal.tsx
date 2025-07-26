@@ -34,6 +34,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ src, alt, onClose }) => {
             height={800} // Max height for the modal image
             objectFit="contain"
             className="rounded-lg"
+            unoptimized
           />
           <button
             className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-lg text-gray-700 hover:text-gray-900 transition duration-300"
