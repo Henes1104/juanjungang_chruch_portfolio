@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import { departmentBoardData } from "./data";
 import Image from "next/image";
@@ -119,11 +119,19 @@ export default function DepartmentPage() {
                   <li key={tab.id} className="mb-4 relative">
                     <button
                       onClick={() => {
-                      setActiveTab(`${tab.id}-intro`);
-                      Object.keys(subMenuSetters).forEach(key => {
-                        subMenuSetters[key](false);
-                      });
-                    }}
+                        const currentSubMenuState = subMenuStates[tab.id];
+                        subMenuSetters[tab.id](!currentSubMenuState);
+
+                        Object.keys(subMenuSetters).forEach(key => {
+                          if (key !== tab.id) {
+                            subMenuSetters[key](false);
+                          }
+                        });
+
+                        if (currentSubMenuState) {
+                          setActiveTab(`${tab.id}-intro`);
+                        }
+                      }}
                       className={`w-full text-left px-4 py-3 rounded-lg text-lg font-semibold ${
                         (activeTab.startsWith(tab.id)) ? "bg-blue-600 text-white shadow-md" : "text-gray-700 hover:bg-blue-100 hover:text-blue-700"
                       } transition duration-300 flex justify-between items-center`}
@@ -146,6 +154,38 @@ export default function DepartmentPage() {
                         ></path>
                       </svg>
                     </button>
+                    <AnimatePresence>
+                      {subMenuStates[tab.id] && (
+                        <motion.ul
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="pl-4 mt-2 space-y-2 overflow-hidden"
+                        >
+                          <li>
+                            <button
+                              onClick={() => setActiveTab(`${tab.id}-intro`)}
+                              className={`w-full text-left px-4 py-2 rounded-lg text-base font-medium ${
+                                activeTab === `${tab.id}-intro` ? "bg-blue-500 text-white" : "text-gray-600 hover:bg-blue-50"
+                              } transition duration-300`}
+                            >
+                              {tab.name} 소개
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              onClick={() => setActiveTab(`${tab.id}-board`)}
+                              className={`w-full text-left px-4 py-2 rounded-lg text-base font-medium ${
+                                activeTab === `${tab.id}-board` ? "bg-blue-500 text-white" : "text-gray-600 hover:bg-blue-50"
+                              } transition duration-300`}
+                            >
+                              {tab.name} 게시판
+                            </button>
+                          </li>
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
                   </li>
                 ))}
               </ul>
